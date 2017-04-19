@@ -1,17 +1,12 @@
 import javafx.scene.layout.Background;
 import org.newdawn.slick.*;
-import org.newdawn.slick.opengl.ImageData;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.TiledMap;
 
-/**
- * Created by Gaute on 4/19/2017.
- */
-public class MainMenu extends BasicGameState {
+public class Climber extends BasicGameState {
 
-    Image startBtn;
-    Image bckgrnd;
+    private Image ground;
 
     @Override
     public int getID() {
@@ -20,12 +15,12 @@ public class MainMenu extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        startBtn = new Image("sprites/startBtn.png");
+         ground = new Image("sprites/ground.png");
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        startBtn.draw();
+        ground.draw();
     }
 
     @Override
