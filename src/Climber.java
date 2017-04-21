@@ -5,8 +5,14 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Climber extends BasicGameState {
+    int aniSpeed1 = 150;
+    int aniSpeed2 = 65;
+
+    int [] duration = {aniSpeed1, aniSpeed1, aniSpeed1, aniSpeed1, aniSpeed1};
+    int [] duration2 = {aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2};
+
     Image ground;
-    Image bckgrnd;
+    //Image bckgrnd;
 
     private Animation sprite, idle, right, left;
     private float x,y;
@@ -50,12 +56,9 @@ public class Climber extends BasicGameState {
                 new Image("sprites/character_run8_L.png")
         };
 
-        int [] duration = {150, 150, 150, 150, 150};
-        int [] duration2 = {150, 150, 150, 150, 150, 150, 150, 150};
-
         idle = new Animation(movementIdle, duration, true);
-        left = new Animation(movementLeft, duration2, false);
-        right = new Animation(movementRight, duration2, false);
+        right = new Animation(movementRight, duration2, true);
+        left = new Animation(movementLeft, duration2, true);
 
         sprite = idle;
     }
@@ -77,12 +80,18 @@ public class Climber extends BasicGameState {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         Input input = gameContainer.getInput();
 
+
         if (input.isKeyDown(Input.KEY_D)) {
-            System.out.println("Key pressed");
-            x += 10;
+            x += 12;
+            sprite = right;
+
         }
         else if (input.isKeyDown(Input.KEY_A)) {
-            x -= 10;
+            x -= 12;
+            sprite = left;
+
+        } else {
+            sprite = idle;
         }
     }
 }
