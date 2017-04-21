@@ -5,12 +5,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Climber extends BasicGameState {
-
     Image ground;
     Image bckgrnd;
+
     private Animation sprite, idle, right, left;
-    int x;
-    int y;
+    private float x,y;
 
     @Override
     public int getID() {
@@ -70,26 +69,20 @@ public class Climber extends BasicGameState {
             posX += 100;
         }
 
-        float x = 100f, y = 590f;
-        sprite.draw((int)x, (int)y);
+        y = 590;
+        sprite.draw(x,y);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        /*
-        Input input = container.getInput();
+        Input input = gameContainer.getInput();
 
-        if (input.isKeyDown(Input.KEY_LEFT))
-        {
-            sprite = left;
-            sprite.update(delta);
-            x -= delta * 0.1f;
+        if (input.isKeyDown(Input.KEY_D)) {
+            System.out.println("Key pressed");
+            x += 10;
         }
-        else if (input.isKeyDown(Input.KEY_RIGHT))
-        {
-            sprite = right;
-            sprite.update(delta);
-            x += delta * 0.1f;
-        }*/
+        else if (input.isKeyDown(Input.KEY_A)) {
+            x -= 10;
+        }
     }
 }
