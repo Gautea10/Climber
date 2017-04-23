@@ -1,48 +1,41 @@
-import javafx.scene.layout.Background;
 import org.newdawn.slick.*;
-import org.newdawn.slick.opengl.ImageData;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.GameState;
-import org.newdawn.slick.state.StateBasedGame;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
+import java.awt.*;
+import java.awt.Color;
 
 /**
- * Created by Gaute on 4/19/2017.
+ * Created by Gaute on 4/23/2017.
  */
-public class MainMenu extends BasicGameState implements ActionListener {
-
-    Image startBtn;
-    Image bckgrnd;
-
-    @Override
-    public int getID() {
-        return 0;
+public class MainMenu extends Scene {
+    public MainMenu() {
+        super();
+        setPriority(1);
     }
 
-    @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        startBtn = new Image("sprites/startBtn.png");
+    protected void CustomRender(GameContainer gameContainer, org.newdawn.slick.Graphics graphics) throws SlickException
+    {
+        // Render a static red box
+        graphics.setColor(org.newdawn.slick.Color.red);
+        graphics.fillRect(100, 100, 200, 200);
     }
 
-    @Override
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        startBtn.draw();
+    protected void CustomUpdate (GameContainer gameContainer, int i) throws SlickException {
+
+
+        //if Space is pressed
+        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE)) {
+            // Add a new Sence2 instance to the SenceManager
+            Game.manager.addSence(new Player());
+        }
     }
 
-    @Override
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+    public void init (GameContainer gameContainer) throws SlickException {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Climber c = new Climber();
+    public String toString()
+    {
+        return "Sence1";
     }
 }

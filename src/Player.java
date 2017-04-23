@@ -1,17 +1,51 @@
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * Created by Gaute on 4/23/2017.
  */
+public class Player extends Scene {
 
-public class Player {
+    int t = 0;
+
     private Animation sprite, idle, right, left;
-    private float xPlayer,yPlayer;
+    private float xPlayer,yPlayer = 590;
     private float speed = 12;
 
+    public Player() {
+        super();
+        setPriority(2);
+    }
 
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+    protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
+    {
+        sprite.draw(xPlayer,yPlayer);
+    }
+
+    protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
+    {
+        Input input = gameContainer.getInput();
+
+        //Character
+        if (input.isKeyDown(Input.KEY_D)) {
+            xPlayer += speed;
+            sprite = right;
+        }
+        else if (input.isKeyDown(Input.KEY_A)) {
+            xPlayer -= speed;
+            sprite = left;
+        } else {
+            sprite = idle;
+        }
+
+        // Creates the world once
+        if (t == 0) {
+            Game.manager.addSence(new World());
+            t++;
+        }
+    }
+
+    public void init(GameContainer gc) throws SlickException
+    {
         Image[] movementIdle = {
                 new Image("sprites/character_idle1.png"),
                 new Image("sprites/character_idle2.png"),
@@ -63,26 +97,8 @@ public class Player {
         sprite = idle;
     }
 
-    public void render() throws SlickException {
-        yPlayer = 590;
-        sprite.draw(xPlayer,yPlayer);
-    }
-
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        Input input = gameContainer.getInput();
-
-        //Character
-        if (input.isKeyDown(Input.KEY_D)) {
-            xPlayer += speed;
-            sprite = right;
-        }
-        else if (input.isKeyDown(Input.KEY_A)) {
-            xPlayer -= speed;
-            sprite = left;
-        } else {
-            sprite = idle;
-        }
-
-        // Find a way to check if player ran to the right or left, to pick direction the idle animation is supposed to be.
+    public String toString()
+    {
+        return "Sence2";
     }
 }
