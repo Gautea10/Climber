@@ -3,6 +3,8 @@ import org.newdawn.slick.*;
 /**
  * Created by Gaute on 4/23/2017.
  */
+
+// Structure for the first world/map
 public class World extends Scene {
 
     Image ground;

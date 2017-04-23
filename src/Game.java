@@ -6,6 +6,8 @@ import org.newdawn.slick.SlickException;
 /**
  * Created by Gaute on 4/23/2017.
  */
+
+// Implements the SceneManager to the project, and skips to MainMenu
 public class Game extends BasicGame{
 
     public static SceneManager manager;

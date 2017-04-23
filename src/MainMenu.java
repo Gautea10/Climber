@@ -7,6 +7,8 @@ import java.awt.Color;
 /**
  * Created by Gaute on 4/23/2017.
  */
+
+// The structure for the game's main menu, skips to Player after space/startButton is clicked
 public class MainMenu extends Scene {
     public MainMenu() {
         super();
@@ -15,7 +17,7 @@ public class MainMenu extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, org.newdawn.slick.Graphics graphics) throws SlickException
     {
-        // Render a static red box
+        // Render a static red box, just so you know MainMenu is working
         graphics.setColor(org.newdawn.slick.Color.red);
         graphics.fillRect(100, 100, 200, 200);
     }

@@ -9,6 +9,8 @@ import org.newdawn.slick.SlickException;
 /**
  * Created by Gaute on 4/23/2017.
  */
+
+// Keeps control over what java files is playing
 public class SceneManager {
     private List<Scene> sences;
 
