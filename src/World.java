@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class World extends Scene {
 
     Image ground;
+    int t = 0;
 
     int cameraX = 0;
     int cameraY = 0;
@@ -35,8 +36,7 @@ public class World extends Scene {
         }
     }
 
-    protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
-    {
+    protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
         Input input = gameContainer.getInput();
 
         if (input.isKeyDown(Input.KEY_D)) {
@@ -44,6 +44,11 @@ public class World extends Scene {
         }
         else if (input.isKeyDown(Input.KEY_A)) {
             cameraX -= speed;
+        }
+
+        if (t == 0) {
+            Game.manager.addSence(new Enemy());
+            t++;
         }
     }
 
