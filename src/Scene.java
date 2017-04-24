@@ -3,10 +3,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import java.awt.*;
 
-public abstract class Scene implements Comparable<Scene>
+
+public class Scene implements Comparable<Scene>
 {
-	// The states a scene can be in
+
+
+    // The states a scene can be in
 	public enum STATE { ON , FREEZE , FREEZE_NEXT , INVISIBLE };
 	// The current state is saved in this variable
 	private STATE state;
