@@ -44,6 +44,17 @@ public class SceneManager {
         Collections.sort(sences);
     }
 
+    public void addSence(Boot sence) {
+        sences.add(sence);
+
+        try {
+            sence.init(gc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Collections.sort(sences);
+    }
+
     public void addSence(Player sence) {
         sences.add(sence);
 

@@ -35,7 +35,7 @@ public class MainMenu extends Scene {
 
         if ((posX > startBtnPosX && posX < 684) && (posY > startBtnPosY && posY < 450)) {
             if (Mouse.isButtonDown(0)) {
-                Game.manager.addSence(new Player());
+                Game.manager.addSence(new Boot());
             }
         }
     }
