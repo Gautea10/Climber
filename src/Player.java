@@ -10,8 +10,8 @@ public class Player extends Scene {
     int t = 0;
     int LorR = 0;
 
-    private Animation sprite, idle, idle2, right, left;
-    private float xPlayer,yPlayer = 590;
+    private Animation sprite, idle, idle2, jumpR, jumpL, right, left;
+    private float xPlayer,yPlayer = 500;
     private float speed = 12;
 
     public Player() {
@@ -21,6 +21,7 @@ public class Player extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
+
         graphics.clear();
         sprite.draw(xPlayer,yPlayer);
     }
@@ -28,6 +29,12 @@ public class Player extends Scene {
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
     {
         Input input = gameContainer.getInput();
+
+        yPlayer += 5;
+
+        if (yPlayer > 590) {
+            yPlayer = 590;
+        }
 
         //Character
         if (input.isKeyDown(Input.KEY_D)) {
@@ -94,6 +101,14 @@ public class Player extends Scene {
                 new Image("sprites/character_run8_L.png")
         };
 
+        Image [] jumpR = {
+                new Image("sprites/character_run3_R.png"),
+        };
+
+        Image [] jumpL = {
+                new Image("sprites/character_run3_L.png"),
+        };
+
         int aniSpeed1 = 150;
         int aniSpeed2 = 65;
 
@@ -104,6 +119,7 @@ public class Player extends Scene {
         idle2 = new Animation(movementIdleL, duration, true);
         right = new Animation(movementRight, duration2, true);
         left = new Animation(movementLeft, duration2, true);
+        //jumpR = new Animation(jumpR)
 
         sprite = idle;
     }

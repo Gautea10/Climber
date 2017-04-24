@@ -49,7 +49,7 @@ public class World extends Scene {
 
     public String toString()
     {
-        return "Sence2";
+        return "Sence3";
     }
 }
 
