@@ -21,6 +21,7 @@ public class Player extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
+        graphics.clear();
         sprite.draw(xPlayer,yPlayer);
     }
 
