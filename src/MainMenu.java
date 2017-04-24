@@ -1,4 +1,6 @@
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.state.GameState;
 
 import java.awt.*;
@@ -10,6 +12,11 @@ import java.awt.Color;
 
 // The structure for the game's main menu, skips to Player after space/startButton is clicked
 public class MainMenu extends Scene {
+
+    Image startBtn;
+    int startBtnPosX = 384;
+    int startBtnPosY = 300;
+
     public MainMenu() {
         super();
         setPriority(1);
@@ -17,22 +24,24 @@ public class MainMenu extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, org.newdawn.slick.Graphics graphics) throws SlickException
     {
-        // Render a static red box, just so you know MainMenu is working
-        graphics.setColor(org.newdawn.slick.Color.red);
-        graphics.fillRect(100, 100, 200, 200);
+        graphics.drawString("Main menu", 500, 100);
+        startBtn.draw(startBtnPosX,startBtnPosY,300,150);
     }
 
     protected void CustomUpdate (GameContainer gameContainer, int i) throws SlickException {
 
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
 
-        //if Space is pressed
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE)) {
-            // Add a new Sence2 instance to the SenceManager
-            Game.manager.addSence(new Player());
+        if ((posX > startBtnPosX && posX < 684) && (posY > startBtnPosY && posY < 450)) {
+            if (Mouse.isButtonDown(0)) {
+                Game.manager.addSence(new Player());
+            }
         }
     }
 
     public void init (GameContainer gameContainer) throws SlickException {
+        startBtn = new Image("sprites/startBtn.png");
 
     }
 
