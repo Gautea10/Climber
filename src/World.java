@@ -8,6 +8,7 @@ import org.newdawn.slick.*;
 public class World extends Scene {
 
     Image ground;
+    int t = 0;
 
     public World() {
         super();
@@ -27,6 +28,10 @@ public class World extends Scene {
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
     {
 
+        if (t == 0) {
+            Game.manager.addSence(new Enemy());
+            t++;
+        }
     }
 
     public void init(GameContainer gc) throws SlickException

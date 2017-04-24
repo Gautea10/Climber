@@ -55,6 +55,17 @@ public class SceneManager {
         Collections.sort(sences);
     }
 
+    public void addSence(Enemy sence) {
+        sences.add(sence);
+
+        try {
+            sence.init(gc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Collections.sort(sences);
+    }
+
     // Removes a scene by an specific object
     public void removeSence (World sence ) {
         sences.remove(sence);
@@ -114,6 +125,7 @@ public class SceneManager {
     {
         sences = new ArrayList<Scene>();
     }
+
 
 
 }
