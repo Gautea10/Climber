@@ -13,14 +13,7 @@ public class World extends Scene {
     Image ground;
     int t = 0;
 
-    int cameraX = 0;
-    int cameraY = 0;
-    int cameraXinit = 0;
-    int CameraYinit;
-
     ArrayList<Image> map;
-
-    int speed = 12;
 
     public World() {
         super();
@@ -37,14 +30,6 @@ public class World extends Scene {
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
-        Input input = gameContainer.getInput();
-
-        if (input.isKeyDown(Input.KEY_D)) {
-            cameraX += speed;
-        }
-        else if (input.isKeyDown(Input.KEY_A)) {
-            cameraX -= speed;
-        }
 
         if (t == 0) {
             Game.manager.addSence(new Enemy());
