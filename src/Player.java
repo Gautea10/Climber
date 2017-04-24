@@ -8,8 +8,9 @@ import org.newdawn.slick.*;
 public class Player extends Scene {
 
     int t = 0;
+    int LorR = 0;
 
-    private Animation sprite, idle, right, left;
+    private Animation sprite, idle, idle2, right, left;
     private float xPlayer,yPlayer = 590;
     private float speed = 12;
 
@@ -31,12 +32,18 @@ public class Player extends Scene {
         if (input.isKeyDown(Input.KEY_D)) {
             xPlayer += speed;
             sprite = right;
+            LorR = 0;
         }
         else if (input.isKeyDown(Input.KEY_A)) {
             xPlayer -= speed;
             sprite = left;
-        } else {
+            LorR = 1;
+        }
+        else if(LorR == 0){
             sprite = idle;
+        }
+        else if(LorR == 1) {
+            sprite = idle2;
         }
 
         // Creates the world once
@@ -93,6 +100,7 @@ public class Player extends Scene {
         int [] duration2 = {aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2};
 
         idle = new Animation(movementIdle, duration, true);
+        idle2 = new Animation(movementIdleL, duration, true);
         right = new Animation(movementRight, duration2, true);
         left = new Animation(movementLeft, duration2, true);
 
