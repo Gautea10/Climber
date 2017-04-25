@@ -22,14 +22,17 @@ public class Player extends Scene {
     private static float speed = 12;
 
     //private Animation player;
-    private Shape player;
+    private Shape playerHitboxR;
+    private Shape playerHitboxL;
+    private Shape slashHitboxR;
+    private Shape slashHitboxL;
     private World world;
 
     int LorR = 0;
 
-    //private Animation sprite, idle, idle2, right, left, jumpR, jumpL;
-    private float xPlayer = 0;
-    private float yPlayer = 0;
+    private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL, jumpR, jumpL;
+    private float xPlayer = 200;
+    private float yPlayer = 100;
 
     public Player(World world) {
         super();
@@ -40,9 +43,27 @@ public class Player extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
-        //player.draw(xPlayer,yPlayer);
+        sprite.draw(playerHitboxR.getX(), playerHitboxR.getY());
+        slashSpriteR.draw(playerHitboxR.getX(), playerHitboxR.getY());
+        slashSpriteL.draw(playerHitboxR.getX() - 15, playerHitboxR.getY());
+
         graphics.setColor(Color.red);
-        graphics.draw(player);
+        if (LorR == 0) {
+            graphics.draw(playerHitboxR);
+        }
+
+        if (LorR == 1) {
+            graphics.draw(playerHitboxL);
+        }
+
+        graphics.setColor(Color.green);
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
+            graphics.draw(slashHitboxR);
+        }
+
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
+            graphics.draw(slashHitboxL);
+        }
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
@@ -50,57 +71,85 @@ public class Player extends Scene {
         yPlayer += gravity;
 
         // Collision in Y
-        player.setY(player.getY() + yPlayer);
+        playerHitboxR.setY(playerHitboxR.getY() + yPlayer);
+        playerHitboxL.setY(playerHitboxL.getY() + yPlayer);
 
-        if( world.collidesWith(player)) {
-            player.setY( player.getY() - yPlayer );
+        slashHitboxR.setY(slashHitboxR.getY() + yPlayer);
+        slashSpriteR.setCurrentFrame(0);
+
+        slashHitboxL.setY(slashHitboxL.getY() + yPlayer);
+        slashSpriteL.setCurrentFrame(0);
+
+        if( world.collidesWith(playerHitboxR)) {
+            playerHitboxR.setY( playerHitboxR.getY() - yPlayer );
+            playerHitboxL.setY( playerHitboxL.getY() - yPlayer );
+            slashHitboxR.setY( slashHitboxR.getY() - yPlayer );
+            slashHitboxL.setY( slashHitboxL.getY() - yPlayer );
             yPlayer = 0;
         }
 
         // X acceleration
         if( gameContainer.getInput().isKeyDown(Input.KEY_D)) {
             xPlayer = speed;
+            sprite = right;
             LorR = 0;
         }
         else if( gameContainer.getInput().isKeyDown(Input.KEY_A)) {
             xPlayer = -speed;
+            sprite = left;
             LorR = 1;
         }
-        else
+        else if(LorR == 0)
         {
             xPlayer = 0;
+            sprite = idle;
+        }
+
+        else if (LorR == 1)
+        {
+            xPlayer = 0;
+            sprite = idle2;
+        }
+
+        // Pickaxe slash
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
+            slashSpriteR.setCurrentFrame(1);
+        }
+
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
+            slashSpriteL.setCurrentFrame(1);
         }
 
         // Jump
-        if (gameContainer.getInput().isKeyDown(Input.KEY_W) && LorR == 0) {
-            player.setY(player.getY()+0.1f);
+        if (gameContainer.getInput().isKeyDown(Input.KEY_W)) {
+            playerHitboxR.setY(playerHitboxR.getY()+0.1f);
+            playerHitboxL.setY(playerHitboxL.getY()+0.1f);
+            slashHitboxR.setY(slashHitboxR.getY()+0.1f);
+            slashHitboxL.setY(slashHitboxL.getY()+0.1f);
 
-            if(world.collidesWith(player)) {
-                //player = jumpR;
-                yPlayer = jumpStrength;
-            }
-        }
-        else if(gameContainer.getInput().isKeyDown(Input.KEY_W) && LorR == 1) {
-            player.setY(player.getY()+0.1f);
-
-            if(world.collidesWith(player)) {
-                //player = jumpL;
+            if(world.collidesWith(playerHitboxR)) {
                 yPlayer = jumpStrength;
             }
         }
 
         // Collision
-        player.setX( player.getX() + xPlayer );
-        if( world.collidesWith(player) )
-        {
-            player.setX( player.getX() - xPlayer );
+        playerHitboxR.setX( playerHitboxR.getX() + xPlayer );
+        playerHitboxL.setX( playerHitboxL.getX() + xPlayer );
+        slashHitboxR.setX( slashHitboxR.getX() + xPlayer );
+        slashHitboxL.setX( slashHitboxL.getX() + xPlayer );
+
+        if(world.collidesWith(playerHitboxR)) {
+            playerHitboxR.setX( playerHitboxR.getX() - xPlayer );
+            playerHitboxL.setX( playerHitboxL.getX() - xPlayer );
+            slashHitboxR.setX( slashHitboxR.getX() - xPlayer );
+            slashHitboxL.setX( slashHitboxL.getX() - xPlayer );
             xPlayer = 0;
         }
     }
 
     public void init(GameContainer gc) throws SlickException
     {
-        /*
+
         Image[] movementIdle = {
                 new Image("sprites/character_idle1.png"),
                 new Image("sprites/character_idle2.png"),
@@ -139,6 +188,7 @@ public class Player extends Scene {
                 new Image("sprites/character_run8_L.png")
         };
 
+        /*
         Image [] jumpRight = {
                 new Image("sprites/character_run2_R.png"),
                 new Image("sprites/character_run2_R.png")
@@ -147,6 +197,15 @@ public class Player extends Scene {
          Image [] jumpLeft = {
                 new Image("sprites/character_run2_L.png"),
                 new Image("sprites/character_run2_L.png")
+        };*/
+
+        Image [] pickAxeSlashR = {
+                new Image("sprites/slash.png"),
+                new Image("sprites/slash1.png")
+        };
+        Image [] pickAxeSlashL = {
+                new Image("sprites/slash.png"),
+                new Image("sprites/slash2.png")
         };
 
         int aniSpeed1 = 150;
@@ -161,11 +220,20 @@ public class Player extends Scene {
         idle2 = new Animation(movementIdleL, duration, true);
         right = new Animation(movementRight, duration2, true);
         left = new Animation(movementLeft, duration2, true);
+        slashR = new Animation(pickAxeSlashR, duration3, false);
+        slashL = new Animation(pickAxeSlashL, duration3, false);
+
+        /*
         jumpR = new Animation(jumpRight, duration3, false);
         jumpL = new Animation(jumpLeft, duration3, false);*/
 
-        //player = idle;
-        player  = new Rectangle(200,200,49,49);
+        sprite = idle;
+        slashSpriteR = slashR;
+        slashSpriteL = slashL;
+        playerHitboxR  = new Rectangle(xPlayer,yPlayer,60,80);
+        playerHitboxL  = new Rectangle(xPlayer + 20,yPlayer,60,80);
+        slashHitboxR = new Rectangle(xPlayer + 25, yPlayer ,70,80);
+        slashHitboxL = new Rectangle(xPlayer - 15, yPlayer,70,80);
     }
 
     public String toString(World world)
