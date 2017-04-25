@@ -80,7 +80,7 @@ public class Player extends Scene {
         slashHitboxL.setY(slashHitboxL.getY() + yPlayer);
         slashSpriteL.setCurrentFrame(0);
 
-        if( world.collidesWith(playerHitboxR)) {
+        if( world.collidesWith(playerHitboxR) || world.collidesWith(playerHitboxL)) {
             playerHitboxR.setY( playerHitboxR.getY() - yPlayer );
             playerHitboxL.setY( playerHitboxL.getY() - yPlayer );
             slashHitboxR.setY( slashHitboxR.getY() - yPlayer );
@@ -138,7 +138,7 @@ public class Player extends Scene {
         slashHitboxR.setX( slashHitboxR.getX() + xPlayer );
         slashHitboxL.setX( slashHitboxL.getX() + xPlayer );
 
-        if(world.collidesWith(playerHitboxR)) {
+        if(world.collidesWith(playerHitboxR) || world.collidesWith(playerHitboxL)) {
             playerHitboxR.setX( playerHitboxR.getX() - xPlayer );
             playerHitboxL.setX( playerHitboxL.getX() - xPlayer );
             slashHitboxR.setX( slashHitboxR.getX() - xPlayer );

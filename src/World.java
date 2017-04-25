@@ -22,9 +22,8 @@ public class World extends Scene {
     int cameraXinit = 0;
     int CameraYinit;
 
-    /*
-    ArrayList<Image> map;
-    ArrayList<Shape> hitbox;*/
+
+    //ArrayList<Image> map;
 
     int speed = 12;
 
@@ -45,12 +44,8 @@ public class World extends Scene {
         graphics.draw(levelBase);
         graphics.draw(platform);
 
-        /*
-        int groundPos = 0;
-        for (int i = 0; i < 50; i++) {
-            map.get(i).draw(groundPos, 668);
-            groundPos += 100;
-        }*/
+        // Draw image ontop of platform rectangle
+        ground.draw(platform.getX(),platform.getY());
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -87,11 +82,11 @@ public class World extends Scene {
                         0,600};
 
         levelBase = new Polygon(polygonPoints);
-        platform = new Rectangle(500,400,100,50);
+        platform = new Rectangle(500,400,100,100);
 
-        /*
         ground = new Image("sprites/ground.png");
 
+        /*
         map = new ArrayList<Image>();
         for (int i = 0; i < 50; i++) {
             map.add(i, ground);
