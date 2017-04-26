@@ -1,7 +1,5 @@
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.GameState;
 
@@ -16,8 +14,6 @@ import java.awt.Color;
 public class MainMenu extends Scene {
 
     Image startBtn;
-    Image bg;
-
     int startBtnPosX = 384;
     int startBtnPosY = 300;
 
@@ -30,8 +26,6 @@ public class MainMenu extends Scene {
     {
         graphics.drawString("Main menu", 500, 100);
         startBtn.draw(startBtnPosX,startBtnPosY,300,150);
-
-        changeBackground(graphics);
     }
 
     protected void CustomUpdate (GameContainer gameContainer, int i) throws SlickException {
@@ -49,10 +43,6 @@ public class MainMenu extends Scene {
     public void init (GameContainer gameContainer) throws SlickException {
         startBtn = new Image("sprites/startBtn.png");
 
-    }
-
-    public void changeBackground(Graphics graphics) throws SlickException{
-        graphics.setBackground(new org.newdawn.slick.Color(128, 118, 118));
     }
 
     public String toString()
