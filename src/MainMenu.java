@@ -1,19 +1,11 @@
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.state.GameState;
 
-import java.awt.*;
-import java.awt.Color;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-
-/**
- * Created by Gaute on 4/23/2017.
- */
 
 // The structure for the game's main menu, skips to Player after space/startButton is clicked
 public class MainMenu extends Scene {
@@ -23,7 +15,6 @@ public class MainMenu extends Scene {
     int startBtnPosY = 300;
 
     Highscore highscore;
-    int highscorePosY = 120;
 
     public MainMenu() {
         super();
