@@ -5,6 +5,8 @@ import org.newdawn.slick.state.GameState;
 
 import java.awt.*;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Gaute on 4/23/2017.
@@ -17,6 +19,7 @@ public class MainMenu extends Scene {
     int startBtnPosX = 384;
     int startBtnPosY = 300;
 
+
     public MainMenu() {
         super();
         setPriority(1);
@@ -26,6 +29,8 @@ public class MainMenu extends Scene {
     {
         graphics.drawString("Main menu", 500, 100);
         startBtn.draw(startBtnPosX,startBtnPosY,300,150);
+        graphics.drawString("Highscore", 100, 100);
+        graphics.drawString(highscoreMap.get(0).toString(), 100, 120);
     }
 
     protected void CustomUpdate (GameContainer gameContainer, int i) throws SlickException {
@@ -42,7 +47,6 @@ public class MainMenu extends Scene {
 
     public void init (GameContainer gameContainer) throws SlickException {
         startBtn = new Image("sprites/startBtn.png");
-
     }
 
     public String toString()
