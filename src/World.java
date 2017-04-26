@@ -15,7 +15,6 @@ public class World extends Scene {
     Player player;
 
     Image ground;
-    int t = 0;
 
     int cameraX = 0;
     int cameraY = 0;
@@ -23,14 +22,16 @@ public class World extends Scene {
     int CameraYinit;
 
 
-    //ArrayList<Image> map;
+    ArrayList<Shape> base;
 
     int speed = 12;
 
-    private Shape platform, levelBase;
+    private Shape /*platform,*/ levelBase, baseR, baseL;
 
-    int platPosX = 0;
-    int platPosY = 668;
+    int platPosX = 900;
+    int platPosY = 600;
+    int platSizeX = 100;
+    int getPlatSizeY = 50;
 
     public World() {
         super();
@@ -40,12 +41,27 @@ public class World extends Scene {
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
         graphics.clear();
-        graphics.setColor(Color.green);
-        graphics.draw(levelBase);
-        graphics.draw(platform);
 
-        // Draw image ontop of platform rectangle
-        ground.draw(platform.getX(),platform.getY());
+        graphics.setColor(Color.white);
+
+        /*
+        for (int i = 0; i < 11; i++) {
+            graphics.draw(base.get(i));
+            graphics.texture(levelBase, ground);
+        }*/
+
+        graphics.draw(levelBase);
+        graphics.fill(levelBase);
+
+        graphics.draw(baseR);
+        graphics.fill(baseR);
+        graphics.draw(baseL);
+        graphics.fill(baseL);
+
+        /*
+        graphics.draw(platform);
+        graphics.texture(platform, ground, platform.getCenterX(),platform.getCenterY());*/
+
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -67,8 +83,10 @@ public class World extends Scene {
     }
 
     public void init(GameContainer gc) throws SlickException {
+        /*
         float[] polygonPoints = new float[]
-                {0,0,
+                {
+                        0,0,
                         50,0,
                         50,550,
                         750,550,
@@ -79,23 +97,25 @@ public class World extends Scene {
                         750,0,
                         800,0,
                         800,600,
-                        0,600};
+                        0,600};*/
 
-        levelBase = new Polygon(polygonPoints);
-        platform = new Rectangle(500,400,100,100);
+        levelBase = new Rectangle(0,680,1024,100);
+        baseR = new Rectangle(0 - 100,0,100,2560);
+        baseL = new Rectangle(1024,0,100,2560);
 
+        //platform = new Rectangle(platPosX,platPosY,100,50);
         ground = new Image("sprites/ground.png");
 
-        /*
-        map = new ArrayList<Image>();
-        for (int i = 0; i < 50; i++) {
-            map.add(i, ground);
-        }*/
+        //base = new ArrayList<Shape>();
+
     }
 
     public boolean collidesWith(Shape s)
     {
-        return levelBase.intersects(s) || platform.intersects(s);
+        return levelBase.intersects(s) ||
+                baseR.intersects(s) ||
+                baseL.intersects(s);
+
         //return platform.intersects(s);
     }
 
