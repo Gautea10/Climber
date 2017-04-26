@@ -22,17 +22,15 @@ public class Player extends Scene {
     private static float speed = 12;
 
     //private Animation player;
-    private Shape playerHitboxR;
-    private Shape playerHitboxL;
-    private Shape slashHitboxR;
-    private Shape slashHitboxL;
+    public Shape playerHitboxR, playerHitboxL, slashHitboxR, slashHitboxL, flagHitbox;
+
     private World world;
 
     int LorR = 0;
 
-    private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL, jumpR, jumpL;
-    private float xPlayer = 200;
-    private float yPlayer = 100;
+    private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL, flagAni, flag;
+    public float xPlayer = 200;
+    public float yPlayer = 100;
 
     public Player(World world) {
         super();
@@ -43,6 +41,7 @@ public class Player extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
+        // Player
         sprite.draw(playerHitboxR.getX(), playerHitboxR.getY());
         slashSpriteR.draw(playerHitboxR.getX(), playerHitboxR.getY());
         slashSpriteL.draw(playerHitboxR.getX() - 15, playerHitboxR.getY());
@@ -64,6 +63,11 @@ public class Player extends Scene {
         if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
             graphics.draw(slashHitboxL);
         }
+
+        // Flag
+        graphics.setColor(Color.yellow);
+        flag.draw(flagHitbox.getX(), flagHitbox.getY());
+        graphics.draw(flagHitbox);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
@@ -188,17 +192,6 @@ public class Player extends Scene {
                 new Image("sprites/character_run8_L.png")
         };
 
-        /*
-        Image [] jumpRight = {
-                new Image("sprites/character_run2_R.png"),
-                new Image("sprites/character_run2_R.png")
-        };
-
-         Image [] jumpLeft = {
-                new Image("sprites/character_run2_L.png"),
-                new Image("sprites/character_run2_L.png")
-        };*/
-
         Image [] pickAxeSlashR = {
                 new Image("sprites/slash.png"),
                 new Image("sprites/slash1.png")
@@ -206,6 +199,13 @@ public class Player extends Scene {
         Image [] pickAxeSlashL = {
                 new Image("sprites/slash.png"),
                 new Image("sprites/slash2.png")
+        };
+
+        Image [] flagMovement = {
+                new Image("sprites/flag1.png"),
+                new Image("sprites/flag2.png"),
+                new Image("sprites/flag3.png"),
+                new Image("sprites/flag4.png")
         };
 
         int aniSpeed1 = 150;
@@ -216,24 +216,34 @@ public class Player extends Scene {
         int [] duration2 = {aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2, aniSpeed2};
         int [] duration3 = {aniSpeed3, aniSpeed3};
 
+        // Player sprite
         idle = new Animation(movementIdle, duration, true);
         idle2 = new Animation(movementIdleL, duration, true);
         right = new Animation(movementRight, duration2, true);
         left = new Animation(movementLeft, duration2, true);
+
+        sprite = idle;
+
+        playerHitboxR  = new Rectangle(xPlayer,yPlayer,60,80);
+        playerHitboxL  = new Rectangle(xPlayer + 20,yPlayer,60,80);
+
+        // Attack sprite
         slashR = new Animation(pickAxeSlashR, duration3, false);
         slashL = new Animation(pickAxeSlashL, duration3, false);
 
-        /*
-        jumpR = new Animation(jumpRight, duration3, false);
-        jumpL = new Animation(jumpLeft, duration3, false);*/
-
-        sprite = idle;
         slashSpriteR = slashR;
         slashSpriteL = slashL;
-        playerHitboxR  = new Rectangle(xPlayer,yPlayer,60,80);
-        playerHitboxL  = new Rectangle(xPlayer + 20,yPlayer,60,80);
         slashHitboxR = new Rectangle(xPlayer + 25, yPlayer ,70,80);
         slashHitboxL = new Rectangle(xPlayer - 15, yPlayer,70,80);
+
+        // Flag sprite
+        int aniSpeedFlag = 400;
+        int [] durationFlag = {aniSpeedFlag, aniSpeedFlag, aniSpeedFlag, aniSpeedFlag};
+
+        flagAni = new Animation(flagMovement, durationFlag, true);
+        flag = flagAni;
+
+        flagHitbox = new Rectangle(350,450,32,100);
     }
 
     public String toString(World world)

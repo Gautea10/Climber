@@ -1,12 +1,12 @@
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.*;
 
 /**
  * Created by Gaute on 4/24/2017.
  */
 public class Boot extends Scene {
+
+
 
     private World world;
     private Player player;
@@ -18,15 +18,18 @@ public class Boot extends Scene {
     }
 
     @Override
-    public void update(GameContainer gameContainer, int i) throws SlickException {
+    public void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
         world.update(gameContainer, i);
         player.update(gameContainer, i);
     }
 
     @Override
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+    public void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException {
+
         world.render(gameContainer, graphics);
         player.render(gameContainer, graphics);
+
+        changeBackground(graphics);
     }
 
     @Override
@@ -37,6 +40,10 @@ public class Boot extends Scene {
 
         player = new Player( world );
         player.init(gameContainer);
+    }
+
+    public void changeBackground(Graphics graphics) throws SlickException{
+        graphics.setBackground(new org.newdawn.slick.Color(125, 125, 125));
     }
 
     public String toString()
