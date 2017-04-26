@@ -6,7 +6,9 @@ import org.newdawn.slick.state.GameState;
 import java.awt.*;
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Gaute on 4/23/2017.
@@ -18,7 +20,8 @@ public class MainMenu extends Scene {
     Image startBtn;
     int startBtnPosX = 384;
     int startBtnPosY = 300;
-
+    Highscore highscore;
+    int highscorePosY = 120;
 
     public MainMenu() {
         super();
@@ -30,7 +33,17 @@ public class MainMenu extends Scene {
         graphics.drawString("Main menu", 500, 100);
         startBtn.draw(startBtnPosX,startBtnPosY,300,150);
         graphics.drawString("Highscore", 100, 100);
-        graphics.drawString(highscoreMap.get(0).toString(), 100, 120);
+
+        Set set = highscore.sortHighscore().entrySet();
+        Iterator i = set.iterator();
+        String s = "";
+
+        for (int j = 0; j < set.size(); j++) {
+            Map.Entry me = (Map.Entry)i.next();
+            s += me.getKey() + ": " + me.getValue() + "\n";
+        }
+        graphics.drawString(s, 100, 120);
+
     }
 
     protected void CustomUpdate (GameContainer gameContainer, int i) throws SlickException {
@@ -47,6 +60,11 @@ public class MainMenu extends Scene {
 
     public void init (GameContainer gameContainer) throws SlickException {
         startBtn = new Image("sprites/startBtn.png");
+        highscore = Highscore.getInstance();
+
+        highscore.addHighscore("name1", 12);
+        highscore.addHighscore("name2", 122);
+        highscore.addHighscore("name3", 4);
     }
 
     public String toString()
