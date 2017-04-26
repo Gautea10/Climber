@@ -47,9 +47,7 @@ public class World extends Scene {
         levelBase = new Rectangle(0,680,1024,100);
         baseR = new Rectangle(0 - 100,0,100,2560);
         baseL = new Rectangle(1024,0,100,2560);
-
-        Platform platform1 = new Platform();
-
+        
     }
 
     public boolean collidesWith(Shape s)
