@@ -14,12 +14,12 @@ public class Enemy extends Scene  {
 
 
     private Animation sprite;
-    private static float speed = 2;
-    private float yEnemy = 10;
-    private float xEnemy = 10;
-    private static float gravity = 0.5f;
+    private float yEnemy = (float) Math.random() * 10 + 150;
+    private float xEnemy = (float) Math.random() * 10 + 150;
+    private static float gravity = 0.02f;
     public Shape Enemyhitbox;
     private World world;
+
 
 
 
@@ -36,13 +36,13 @@ public class Enemy extends Scene  {
     {
 
         graphics.setColor(Color.red);
-        graphics.draw(Enemyhitbox);
         graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
 
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
+
         yEnemy += gravity;
 
         // Collision in Y
@@ -80,6 +80,7 @@ public class Enemy extends Scene  {
         int sprspeed = 63;
 
         int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
+
         sprite = new Animation(Ghost, duration, true);
 
         Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 80);
@@ -96,7 +97,6 @@ public class Enemy extends Scene  {
 
 
 }
-
 
 
 }
