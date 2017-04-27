@@ -1,15 +1,13 @@
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
 
-/**
- * Created by Gaute on 4/24/2017.
- */
+import java.util.ArrayList;
+
+
 public class Boot extends Scene {
-
-
 
     private World world;
     private Player player;
+    ArrayList<Enemy> enemyArrayList;
 
     public Boot() {
         super();
@@ -21,15 +19,42 @@ public class Boot extends Scene {
     public void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
         world.update(gameContainer, i);
         player.update(gameContainer, i);
+        for (int l = 0; l < enemyArrayList.size(); l++){
+            enemyArrayList.get(l).update(gameContainer, i);
+        }
+
+
+        for (int g = 0; g < enemyArrayList.size(); g++) {
+            if (player.playerHitboxR.intersects(enemyArrayList.get(g).Enemyhitbox)) {
+                Game.manager.clear();
+                Game.manager.addSence(new MainMenu());
+            }
+        }
+
+        for (int h = 0; h < enemyArrayList.size(); h++) {
+            if (player.slashHitboxL.intersects(enemyArrayList.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                enemyArrayList.get(h).setState(STATE.INVISIBLE);
+                enemyArrayList.get(h).Enemyhitbox.setLocation(500000,500000);
+            }
+        }
+
+        for (int j = 0; j < enemyArrayList.size(); j++) {
+            if (player.slashHitboxR.intersects(enemyArrayList.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                enemyArrayList.get(j).setState(STATE.INVISIBLE);
+                enemyArrayList.get(j).Enemyhitbox.setLocation(500000, 5000000);
+            }
+        }
     }
 
     @Override
     public void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException {
-
         world.render(gameContainer, graphics);
         player.render(gameContainer, graphics);
+        for (int i = 0; i < enemyArrayList.size(); i++) {
+            enemyArrayList.get(i).render(gameContainer, graphics);
+        }
 
-        changeBackground(graphics);
+
     }
 
     @Override
@@ -40,10 +65,13 @@ public class Boot extends Scene {
 
         player = new Player( world );
         player.init(gameContainer);
-    }
 
-    public void changeBackground(Graphics graphics) throws SlickException{
-        graphics.setBackground(new org.newdawn.slick.Color(125, 125, 125));
+        enemyArrayList = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            enemyArrayList.add(i, new Enemy(world));
+            enemyArrayList.get(i).init(gameContainer);
+        }
     }
 
     public String toString()
