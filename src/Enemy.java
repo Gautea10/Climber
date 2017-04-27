@@ -90,6 +90,7 @@ public class Enemy extends Scene  {
     public String toString() {
         return "Sence4";
     }
+<<<<<<< HEAD
 
 
 
@@ -100,3 +101,6 @@ public class Enemy extends Scene  {
 
 
 }
+=======
+}
+>>>>>>> c2d8eb25fd87960c9dda3d92351322aafacdeb79

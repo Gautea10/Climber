@@ -8,6 +8,8 @@ public class Boot extends Scene {
     private World world;
     private Player player;
     ArrayList<Enemy> enemyArrayList;
+    private int score = 0;
+    Highscore highscore;
 
     public Boot() {
         super();
@@ -25,7 +27,7 @@ public class Boot extends Scene {
 
 
         for (int g = 0; g < enemyArrayList.size(); g++) {
-            if (player.playerHitboxR.intersects(enemyArrayList.get(g).Enemyhitbox)) {
+            if (player.playerHitbox.intersects(enemyArrayList.get(g).Enemyhitbox)) {
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
             }
@@ -35,6 +37,7 @@ public class Boot extends Scene {
             if (player.slashHitboxL.intersects(enemyArrayList.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
                 enemyArrayList.get(h).setState(STATE.INVISIBLE);
                 enemyArrayList.get(h).Enemyhitbox.setLocation(500000,500000);
+                score += 10;
             }
         }
 
@@ -42,6 +45,7 @@ public class Boot extends Scene {
             if (player.slashHitboxR.intersects(enemyArrayList.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
                 enemyArrayList.get(j).setState(STATE.INVISIBLE);
                 enemyArrayList.get(j).Enemyhitbox.setLocation(500000, 5000000);
+                score += 10;
             }
         }
     }
@@ -54,7 +58,7 @@ public class Boot extends Scene {
             enemyArrayList.get(i).render(gameContainer, graphics);
         }
 
-
+        graphics.drawString("Score: " + score, 10, 50);
     }
 
     @Override
@@ -72,6 +76,8 @@ public class Boot extends Scene {
             enemyArrayList.add(i, new Enemy(world));
             enemyArrayList.get(i).init(gameContainer);
         }
+
+        highscore = Highscore.getInstance();
     }
 
     public String toString()
