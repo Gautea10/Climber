@@ -1,4 +1,5 @@
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
