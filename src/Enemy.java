@@ -64,9 +64,6 @@ public class Enemy extends Scene  {
         if (world.collidesWith(Enemyhitbox)){
 
         }
-
-
-
     }
 
     public void init(GameContainer gc) throws SlickException {
@@ -98,5 +95,3 @@ public class Enemy extends Scene  {
 }
 
 
-
-}

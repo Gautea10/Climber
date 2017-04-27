@@ -2,12 +2,15 @@ import org.newdawn.slick.*;
 
 import java.util.ArrayList;
 
-
 public class Boot extends Scene {
+
+    //private World world;
+    //private Player player;
+    ArrayList<Enemy> enemyArrayList;
 
     private World world;
     private Player player;
-    ArrayList<Enemy> enemyArrayList;
+    private Win win;
 
     public Boot() {
         super();
@@ -25,7 +28,7 @@ public class Boot extends Scene {
 
 
         for (int g = 0; g < enemyArrayList.size(); g++) {
-            if (player.playerHitboxR.intersects(enemyArrayList.get(g).Enemyhitbox)) {
+            if (player.playerHitbox.intersects(enemyArrayList.get(g).Enemyhitbox)) {
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
             }

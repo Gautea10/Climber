@@ -50,15 +50,13 @@ public class Player extends Scene {
         graphics.draw(playerHitbox);
 
         graphics.setColor(Color.green);
-        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
+        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE) && LorR == 0) {
             graphics.draw(slashHitboxR);
         }
 
-        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
+        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE) && LorR == 1) {
             graphics.draw(slashHitboxL);
         }
-
-        ;
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
