@@ -9,15 +9,9 @@ import java.awt.*;
 public class Scene implements Comparable<Scene>
 {
 
-
-    // The states a scene can be in
 	public enum STATE { ON , FREEZE , FREEZE_NEXT , INVISIBLE };
-	// The current state is saved in this variable
 	private STATE state;
-	// The render priority - We will need this to decide which scene is rendered first
 	private int prio = 0;
-	
-	// An Image "Buffer" to hold the last active frame when our scene get freezed
 	private Image sence;
 	
 	
@@ -34,7 +28,6 @@ public class Scene implements Comparable<Scene>
 		}
 	}
 
-	
 	// These methods will be used by the "real" scenes that inherit from this scene
 	protected void CustomRender(GameContainer gc, Graphics g) throws SlickException 
 	{
@@ -50,11 +43,7 @@ public class Scene implements Comparable<Scene>
 	{
 		
 	}
-	// These methods will be used by the "real" scenes that inherit from this scene
-	
 
-	// This render method get called by the Scene-Manager
-	// It handles if the scene is visible/frozen/on
 	// This method calls our "CustomRender"
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		if( state != STATE.INVISIBLE )
@@ -119,5 +108,5 @@ public class Scene implements Comparable<Scene>
 	{
 		state = s;
 	}
-	
+
 }

@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,17 +34,6 @@ public class SceneManager {
         Collections.sort(sences);
     }
 
-    public void addSence(World sence) {
-        sences.add(sence);
-
-        try {
-            sence.init(gc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Collections.sort(sences);
-    }
-
     public void addSence(Boot sence) {
         sences.add(sence);
 
@@ -53,47 +43,6 @@ public class SceneManager {
             e.printStackTrace();
         }
         Collections.sort(sences);
-    }
-
-    public void addSence(Player sence) {
-        sences.add(sence);
-
-        try {
-            sence.init(gc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Collections.sort(sences);
-    }
-
-    public void addSence(Enemy sence) {
-        sences.add(sence);
-
-        try {
-            sence.init(gc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Collections.sort(sences);
-    }
-
-    // Removes a scene by an specific object
-    public void removeSence (World sence ) {
-        sences.remove(sence);
-    }
-
-    // Removes a scene by an specific name
-    public boolean removeSence ( String sence )
-    {
-        for( int i = 0 ; i < sences.size() ; i++ )
-        {
-            if( sences.get(i).toString().equals(sence) )
-            {
-                sences.remove(i);
-                return true;
-            }
-        }
-        return false;
     }
 
     // Render all scenes
@@ -112,31 +61,10 @@ public class SceneManager {
         }
     }
 
-    // Get a scene by name
-    public Scene getSence ( String sence )
-    {
-        for( int i = 0 ; i < sences.size() ; i++ )
-        {
-            if( sences.get(i).toString().equals(sence) )
-            {
-                return sences.get(i);
-            }
-        }
-        return null;
-    }
-
-    // Re-Sort the list
-    public void sort ()
-    {
-        Collections.sort(sences);
-    }
-
     // Clear the list
     public void clear ()
     {
         sences = new ArrayList<Scene>();
     }
-
-
 
 }
