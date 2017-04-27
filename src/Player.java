@@ -165,7 +165,7 @@ public class Player extends Scene {
         left = new Animation(movementLeft, duration2, true);
         sprite = idle;
 
-        playerHitbox  = new Rectangle(xPlayer-20,yPlayer,40,80);
+        playerHitbox  = new Rectangle(xPlayer-20,yPlayer,45,80);
         System.out.println(yPlayer);
 
         // Attack sprite
