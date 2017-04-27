@@ -89,14 +89,4 @@ public class Enemy extends Scene  {
     public String toString() {
         return "Sence4";
     }
-
-
-
-
-
-
-}
-
-
-
 }
