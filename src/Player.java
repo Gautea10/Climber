@@ -18,19 +18,19 @@ import org.newdawn.slick.geom.Shape;
 public class Player extends Scene {
 
     private static float gravity = 0.5f;
-    private static float jumpStrength = -15;
+    private static float jumpStrength = -13;
     private static float speed = 12;
 
     //private Animation player;
-    public Shape playerHitboxR, playerHitboxL, slashHitboxR, slashHitboxL, flagHitbox;
+    public Shape playerHitbox, slashHitboxR, slashHitboxL;
 
     private World world;
 
     int LorR = 0;
 
-    private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL, flagAni, flag;
-    public float xPlayer = 200;
-    public float yPlayer = 100;
+    private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL;
+    public float xPlayer = 1024 / 2;
+    public float yPlayer = 350;
 
     public Player(World world) {
         super();
@@ -42,18 +42,12 @@ public class Player extends Scene {
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
         // Player
-        sprite.draw(playerHitboxR.getX(), playerHitboxR.getY());
-        slashSpriteR.draw(playerHitboxR.getX(), playerHitboxR.getY());
-        slashSpriteL.draw(playerHitboxR.getX() - 15, playerHitboxR.getY());
+        sprite.draw(playerHitbox.getX(), playerHitbox.getY());
+        slashSpriteR.draw(playerHitbox.getX() - 5, playerHitbox.getY());
+        slashSpriteL.draw(playerHitbox.getX() - 50, playerHitbox.getY());
 
         graphics.setColor(Color.red);
-        if (LorR == 0) {
-            graphics.draw(playerHitboxR);
-        }
-
-        if (LorR == 1) {
-            graphics.draw(playerHitboxL);
-        }
+        graphics.draw(playerHitbox);
 
         graphics.setColor(Color.green);
         if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
@@ -64,10 +58,7 @@ public class Player extends Scene {
             graphics.draw(slashHitboxL);
         }
 
-        // Flag
-        graphics.setColor(Color.yellow);
-        flag.draw(flagHitbox.getX(), flagHitbox.getY());
-        graphics.draw(flagHitbox);
+        ;
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
@@ -75,8 +66,7 @@ public class Player extends Scene {
         yPlayer += gravity;
 
         // Collision in Y
-        playerHitboxR.setY(playerHitboxR.getY() + yPlayer);
-        playerHitboxL.setY(playerHitboxL.getY() + yPlayer);
+        playerHitbox.setY(playerHitbox.getY() + yPlayer);
 
         slashHitboxR.setY(slashHitboxR.getY() + yPlayer);
         slashSpriteR.setCurrentFrame(0);
@@ -84,9 +74,8 @@ public class Player extends Scene {
         slashHitboxL.setY(slashHitboxL.getY() + yPlayer);
         slashSpriteL.setCurrentFrame(0);
 
-        if( world.collidesWith(playerHitboxR) || world.collidesWith(playerHitboxL)) {
-            playerHitboxR.setY( playerHitboxR.getY() - yPlayer );
-            playerHitboxL.setY( playerHitboxL.getY() - yPlayer );
+        if( world.collidesWith(playerHitbox)) {
+            playerHitbox.setY( playerHitbox.getY() - yPlayer );
             slashHitboxR.setY( slashHitboxR.getY() - yPlayer );
             slashHitboxL.setY( slashHitboxL.getY() - yPlayer );
             yPlayer = 0;
@@ -126,25 +115,22 @@ public class Player extends Scene {
 
         // Jump
         if (gameContainer.getInput().isKeyDown(Input.KEY_W)) {
-            playerHitboxR.setY(playerHitboxR.getY()+0.1f);
-            playerHitboxL.setY(playerHitboxL.getY()+0.1f);
-            slashHitboxR.setY(slashHitboxR.getY()+0.1f);
-            slashHitboxL.setY(slashHitboxL.getY()+0.1f);
+            playerHitbox.setY(playerHitbox.getY() + 0.1f);
+            slashHitboxR.setY(slashHitboxR.getY() + 0.1f);
+            slashHitboxL.setY(slashHitboxL.getY() + 0.1f);
 
-            if(world.collidesWith(playerHitboxR)) {
+            if(world.collidesWith(playerHitbox)) {
                 yPlayer = jumpStrength;
             }
         }
 
         // Collision
-        playerHitboxR.setX( playerHitboxR.getX() + xPlayer );
-        playerHitboxL.setX( playerHitboxL.getX() + xPlayer );
+        playerHitbox.setX( playerHitbox.getX() + xPlayer );
         slashHitboxR.setX( slashHitboxR.getX() + xPlayer );
         slashHitboxL.setX( slashHitboxL.getX() + xPlayer );
 
-        if(world.collidesWith(playerHitboxR) || world.collidesWith(playerHitboxL)) {
-            playerHitboxR.setX( playerHitboxR.getX() - xPlayer );
-            playerHitboxL.setX( playerHitboxL.getX() - xPlayer );
+        if(world.collidesWith(playerHitbox) /*|| world.collidesWith(playerHitboxL)*/) {
+            playerHitbox.setX( playerHitbox.getX() - xPlayer );
             slashHitboxR.setX( slashHitboxR.getX() - xPlayer );
             slashHitboxL.setX( slashHitboxL.getX() - xPlayer );
             xPlayer = 0;
@@ -201,13 +187,6 @@ public class Player extends Scene {
                 new Image("sprites/slash2.png")
         };
 
-        Image [] flagMovement = {
-                new Image("sprites/flag1.png"),
-                new Image("sprites/flag2.png"),
-                new Image("sprites/flag3.png"),
-                new Image("sprites/flag4.png")
-        };
-
         int aniSpeed1 = 150;
         int aniSpeed2 = 65;
         int aniSpeed3 = 500;
@@ -221,11 +200,11 @@ public class Player extends Scene {
         idle2 = new Animation(movementIdleL, duration, true);
         right = new Animation(movementRight, duration2, true);
         left = new Animation(movementLeft, duration2, true);
-
         sprite = idle;
 
-        playerHitboxR  = new Rectangle(xPlayer,yPlayer,60,80);
-        playerHitboxL  = new Rectangle(xPlayer + 20,yPlayer,60,80);
+        playerHitbox  = new Rectangle(xPlayer,yPlayer,40,80);
+
+        //playerHitboxL  = new Rectangle(xPlayer + 40,yPlayer,40,80);
 
         // Attack sprite
         slashR = new Animation(pickAxeSlashR, duration3, false);
@@ -233,17 +212,9 @@ public class Player extends Scene {
 
         slashSpriteR = slashR;
         slashSpriteL = slashL;
-        slashHitboxR = new Rectangle(xPlayer + 25, yPlayer ,70,80);
-        slashHitboxL = new Rectangle(xPlayer - 15, yPlayer,70,80);
+        slashHitboxR = new Rectangle(xPlayer + 20, yPlayer ,70,80);
+        slashHitboxL = new Rectangle(xPlayer - 50, yPlayer,70,80);
 
-        // Flag sprite
-        int aniSpeedFlag = 400;
-        int [] durationFlag = {aniSpeedFlag, aniSpeedFlag, aniSpeedFlag, aniSpeedFlag};
-
-        flagAni = new Animation(flagMovement, durationFlag, true);
-        flag = flagAni;
-
-        flagHitbox = new Rectangle(350,450,32,100);
     }
 
     public String toString(World world)

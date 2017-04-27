@@ -3,6 +3,7 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -12,13 +13,8 @@ import java.util.ArrayList;
 // Structure for the first world/map
 public class World extends Scene {
 
-    int speed = 12;
-
-    private Shape /*platform,*/ levelBase, baseR, baseL;
-    private Platform platform;
-    private Platform platform1;
-    private Platform platform2;
-
+    private Shape levelBase, baseR, baseL;
+    private Shape platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8;
 
     public World() {
         super();
@@ -28,7 +24,6 @@ public class World extends Scene {
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
         graphics.clear();
-
         graphics.setColor(Color.white);
 
         // Base of level
@@ -40,9 +35,22 @@ public class World extends Scene {
         graphics.fill(baseL);
 
         // Platforms
-        platform.render(gameContainer, graphics);
-        platform1.render(gameContainer, graphics);
-        platform2.render(gameContainer, graphics);
+        graphics.draw(platform1);
+        graphics.fill(platform1);
+        graphics.draw(platform2);
+        graphics.fill(platform2);
+        graphics.draw(platform3);
+        graphics.fill(platform3);
+        graphics.draw(platform4);
+        graphics.fill(platform4);
+        graphics.draw(platform5);
+        graphics.fill(platform5);
+        graphics.draw(platform6);
+        graphics.fill(platform6);
+        graphics.draw(platform7);
+        graphics.fill(platform7);
+        graphics.draw(platform8);
+        graphics.fill(platform8);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -55,20 +63,32 @@ public class World extends Scene {
         baseR = new Rectangle(0 - 100,0,100,2560);
         baseL = new Rectangle(1024,0,100,2560);
 
-        platform = new Platform(400,500,100,50);
-        platform1 = new Platform(600,300,100,50);
-        platform2 = new Platform(200,100,100,50);
+        // Platforms
+        platform1 = new Rectangle(0, 580, 100, 50);
+        platform2 = new Rectangle(1024 - 100, 580, 100, 50);
+        platform3 = new Rectangle(1024/2 - 250, 500, 500, 50);
+        platform4 = new Rectangle(100, 350, 120, 50);
+        platform5 = new Rectangle(1000-200, 340, 50, 30);
+        platform6 = new Rectangle(150,200,100,50);
+        platform7 = new Rectangle(700,180,100,50);
+        platform8 = new Rectangle(1024/2 - 250,120,400,40);
 
-        platform.init(gameContainer);
-        platform1.init(gameContainer);
-        platform2.init(gameContainer);
+
     }
 
     public boolean collidesWith(Shape s)
     {
         return levelBase.intersects(s) ||
                 baseR.intersects(s) ||
-                baseL.intersects(s);
+                baseL.intersects(s) ||
+                platform1.intersects(s) ||
+                platform2.intersects(s) ||
+                platform3.intersects(s) ||
+                platform4.intersects(s) ||
+                platform5.intersects(s) ||
+                platform6.intersects(s) ||
+                platform7.intersects(s) ||
+                platform8.intersects(s);
     }
 
     public String toString()
