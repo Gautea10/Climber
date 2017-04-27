@@ -15,8 +15,8 @@ public class Enemy extends Scene  {
 
     private Animation sprite;
     private static float speed = 2;
-    private float yEnemy = 10;
-    private float xEnemy = 10;
+    public float yEnemy = 10;
+    public float xEnemy = 5;
     private static float gravity = 0.5f;
     public Shape Enemyhitbox;
     private World world;
@@ -25,10 +25,9 @@ public class Enemy extends Scene  {
 
     public Enemy(World world) {
         super();
-        setPriority(4);
+        setPriority(6);
         System.out.println("Enemy Ran");
         this.world = world;
-
 
     }
 
@@ -45,6 +44,7 @@ public class Enemy extends Scene  {
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
         yEnemy += gravity;
 
+
         // Collision in Y
         Enemyhitbox.setY(Enemyhitbox.getY() + yEnemy);
 
@@ -59,10 +59,6 @@ public class Enemy extends Scene  {
         if (world.collidesWith(Enemyhitbox)) {
             Enemyhitbox.setX(Enemyhitbox.getX() - xEnemy);
             xEnemy = 0;
-        }
-
-        if (world.collidesWith(Enemyhitbox)){
-
         }
     }
 

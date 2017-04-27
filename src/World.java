@@ -67,13 +67,13 @@ public class World extends Scene {
         platform1 = new Rectangle(0, 580, 100, 50);
         platform2 = new Rectangle(1024 - 100, 580, 100, 50);
         platform3 = new Rectangle(1024/2 - 250, 500, 500, 50);
-        platform4 = new Rectangle(100, 350, 120, 50);
-        platform5 = new Rectangle(1000-200, 340, 50, 30);
-        platform6 = new Rectangle(150,200,100,50);
-        platform7 = new Rectangle(700,180,100,50);
-        platform8 = new Rectangle(1024/2 - 250,120,400,40);
 
+        platform4 = new Rectangle((1024/2) - 224, 350, 120, 50);
+        platform5 = new Rectangle(600, 350, 120, 50);
 
+        platform6 = new Rectangle(0,220,200,50);
+        platform7 = new Rectangle(1024-200,240,200,50);
+        platform8 = new Rectangle(1024/2 - 250,100,500,40);
     }
 
     public boolean collidesWith(Shape s)

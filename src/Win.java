@@ -37,7 +37,7 @@ public class Win extends Scene {
         flagAni = new Animation(flagMovement, 400, true);
         flag = flagAni;
 
-        flagHitbox = new Rectangle(350,450,32,100);
+        flagHitbox = new Rectangle(1024/2,580,32,100);
 
         int aniSpeedFlag = 400;
         int [] durationFlag = {aniSpeedFlag, aniSpeedFlag, aniSpeedFlag, aniSpeedFlag};

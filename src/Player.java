@@ -18,24 +18,21 @@ import org.newdawn.slick.geom.Shape;
 public class Player extends Scene {
 
     private static float gravity = 0.5f;
-    private static float jumpStrength = -13;
+    public static float jumpStrength = -13;
     private static float speed = 12;
 
     //private Animation player;
     public Shape playerHitbox, slashHitboxR, slashHitboxL;
 
-    private World world;
-
     int LorR = 0;
 
     private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL;
     public float xPlayer = 1024 / 2;
-    public float yPlayer = 350;
+    public float yPlayer = 388;
 
-    public Player(World world) {
+    public Player() {
         super();
-        setPriority(3);
-        this.world = world;
+        setPriority(5);
         System.out.println("Player Ran");
     }
 
@@ -44,17 +41,17 @@ public class Player extends Scene {
         // Player
         sprite.draw(playerHitbox.getX(), playerHitbox.getY());
         slashSpriteR.draw(playerHitbox.getX() - 5, playerHitbox.getY());
-        slashSpriteL.draw(playerHitbox.getX() - 50, playerHitbox.getY());
+        slashSpriteL.draw(playerHitbox.getX() - 40, playerHitbox.getY());
 
         graphics.setColor(Color.red);
         graphics.draw(playerHitbox);
 
         graphics.setColor(Color.green);
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE) && LorR == 0) {
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
             graphics.draw(slashHitboxR);
         }
 
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE) && LorR == 1) {
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
             graphics.draw(slashHitboxL);
         }
     }
@@ -65,19 +62,10 @@ public class Player extends Scene {
 
         // Collision in Y
         playerHitbox.setY(playerHitbox.getY() + yPlayer);
-
         slashHitboxR.setY(slashHitboxR.getY() + yPlayer);
         slashSpriteR.setCurrentFrame(0);
-
         slashHitboxL.setY(slashHitboxL.getY() + yPlayer);
         slashSpriteL.setCurrentFrame(0);
-
-        if( world.collidesWith(playerHitbox)) {
-            playerHitbox.setY( playerHitbox.getY() - yPlayer );
-            slashHitboxR.setY( slashHitboxR.getY() - yPlayer );
-            slashHitboxL.setY( slashHitboxL.getY() - yPlayer );
-            yPlayer = 0;
-        }
 
         // X acceleration
         if( gameContainer.getInput().isKeyDown(Input.KEY_D)) {
@@ -109,29 +97,6 @@ public class Player extends Scene {
 
         if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
             slashSpriteL.setCurrentFrame(1);
-        }
-
-        // Jump
-        if (gameContainer.getInput().isKeyDown(Input.KEY_W)) {
-            playerHitbox.setY(playerHitbox.getY() + 0.1f);
-            slashHitboxR.setY(slashHitboxR.getY() + 0.1f);
-            slashHitboxL.setY(slashHitboxL.getY() + 0.1f);
-
-            if(world.collidesWith(playerHitbox)) {
-                yPlayer = jumpStrength;
-            }
-        }
-
-        // Collision
-        playerHitbox.setX( playerHitbox.getX() + xPlayer );
-        slashHitboxR.setX( slashHitboxR.getX() + xPlayer );
-        slashHitboxL.setX( slashHitboxL.getX() + xPlayer );
-
-        if(world.collidesWith(playerHitbox) /*|| world.collidesWith(playerHitboxL)*/) {
-            playerHitbox.setX( playerHitbox.getX() - xPlayer );
-            slashHitboxR.setX( slashHitboxR.getX() - xPlayer );
-            slashHitboxL.setX( slashHitboxL.getX() - xPlayer );
-            xPlayer = 0;
         }
     }
 
@@ -200,9 +165,8 @@ public class Player extends Scene {
         left = new Animation(movementLeft, duration2, true);
         sprite = idle;
 
-        playerHitbox  = new Rectangle(xPlayer,yPlayer,40,80);
-
-        //playerHitboxL  = new Rectangle(xPlayer + 40,yPlayer,40,80);
+        playerHitbox  = new Rectangle(xPlayer-20,yPlayer,40,80);
+        System.out.println(yPlayer);
 
         // Attack sprite
         slashR = new Animation(pickAxeSlashR, duration3, false);
@@ -210,8 +174,8 @@ public class Player extends Scene {
 
         slashSpriteR = slashR;
         slashSpriteL = slashL;
-        slashHitboxR = new Rectangle(xPlayer + 20, yPlayer ,70,80);
-        slashHitboxL = new Rectangle(xPlayer - 50, yPlayer,70,80);
+        slashHitboxR = new Rectangle(xPlayer, yPlayer ,70,80);
+        slashHitboxL = new Rectangle(xPlayer - 60, yPlayer,70,80);
 
     }
 
