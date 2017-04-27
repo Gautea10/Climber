@@ -14,7 +14,7 @@ public class MainMenu extends Scene {
     int startBtnPosX = 384;
     int startBtnPosY = 300;
 
-    Highscore highscore;
+    public static Highscore highscore;
 
     public MainMenu() {
         super();
