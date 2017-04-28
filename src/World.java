@@ -1,6 +1,7 @@
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.opengl.Texture;
 
 /**
  * Created by Gaute on 4/23/2017.
@@ -13,6 +14,7 @@ public class World extends Scene {
     private Shape platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8;
 
     Image background;
+    Image groundTexture;
 
     public World() {
         super();
@@ -27,7 +29,8 @@ public class World extends Scene {
 
         // Base of level
         graphics.draw(levelBase);
-        graphics.fill(levelBase);
+        graphics.texture(levelBase,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(baseR);
         graphics.fill(baseR);
         graphics.draw(baseL);
@@ -35,21 +38,29 @@ public class World extends Scene {
 
         // Platforms
         graphics.draw(platform1);
-        graphics.fill(platform1);
+        graphics.texture(platform1,groundTexture,platform1.getX(),platform1.getY());
+
+        //graphics.fill(platform1);
         graphics.draw(platform2);
-        graphics.fill(platform2);
+        graphics.texture(platform2,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(platform3);
-        graphics.fill(platform3);
+        graphics.texture(platform3,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(platform4);
-        graphics.fill(platform4);
+        graphics.texture(platform4,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(platform5);
-        graphics.fill(platform5);
+        graphics.texture(platform5,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(platform6);
-        graphics.fill(platform6);
+        graphics.texture(platform6,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(platform7);
-        graphics.fill(platform7);
+        graphics.texture(platform7,groundTexture,platform1.getX(),platform1.getY());
+
         graphics.draw(platform8);
-        graphics.fill(platform8);
+        graphics.texture(platform8,groundTexture,platform1.getX(),platform1.getY());
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -59,8 +70,8 @@ public class World extends Scene {
     public void init(GameContainer gameContainer) throws SlickException {
 
         levelBase = new Rectangle(0,680,1024,100);
-        baseR = new Rectangle(0 - 100,0,100,2560);
-        baseL = new Rectangle(1024,0,100,2560);
+        baseR = new Rectangle(0 - 100,-500,100,2560);
+        baseL = new Rectangle(1024,-500,100,2560);
 
         // Platforms
         platform1 = new Rectangle(0, 580, 100, 50);
@@ -75,6 +86,7 @@ public class World extends Scene {
         platform8 = new Rectangle(1024/2 - 250,100,500,40);
 
         background = new Image("sprites/world1Bg.png");
+        groundTexture = new Image("sprites/world1Texture.png");
     }
 
     public boolean collidesWith(Shape s)
