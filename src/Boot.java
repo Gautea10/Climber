@@ -80,49 +80,73 @@ public class Boot extends Scene {
             Game.manager.addSence(new MainMenu());
         }
 
+        // Player attack collisions Left
         for (int h = 0; h < enemyArrayListWorld1.size(); h++) {
             if (player.slashHitboxL.intersects(enemyArrayListWorld1.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
-                enemyArrayListWorld1.get(h).setState(STATE.INVISIBLE);
-                enemyArrayListWorld1.get(h).Enemyhitbox.setLocation(500000,500000);
-                score += 10;
+                time += i;
+                System.out.println("EnemyL: " + time);
+                if (time<duration) {
+                    enemyArrayListWorld1.get(h).setState(STATE.INVISIBLE);
+                    enemyArrayListWorld1.get(h).Enemyhitbox.setLocation(500000, 500000);
+                    score += 10;
+                }
+            }
+            if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                time = 0;
             }
         }
 
         for (int h = 0; h < enemyArrayListWorld2.size(); h++) {
             if (player.slashHitboxL.intersects(enemyArrayListWorld2.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
-                enemyArrayListWorld2.get(h).setState(STATE.INVISIBLE);
-                enemyArrayListWorld2.get(h).Enemyhitbox.setLocation(500000,500000);
-                score += 10;
+                time += i;
+                System.out.println("EnemyL: " + time);
+                if (time<duration) {
+                    enemyArrayListWorld2.get(h).setState(STATE.INVISIBLE);
+                    enemyArrayListWorld2.get(h).Enemyhitbox.setLocation(500000, 500000);
+                    score += 10;
+                }
+            }
+            if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                time = 0;
             }
         }
 
         if (player.slashHitboxL.intersects(boss.Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 3) {
-            if (boss.lives > 0) {
-                boss.lives -= 1;
-            } else {
-                boss.setState(STATE.INVISIBLE);
-                boss.Enemyhitbox.setLocation(5000000, 500000);
+            time += i;
+            System.out.println("Boss: " + time);
+            if (time<duration) {
+                if (boss.lives > 0) {
+                    boss.lives -= 1;
+                } else {
+                    boss.setState(STATE.INVISIBLE);
+                    boss.Enemyhitbox.setLocation(5000000, 500000);
+                }
+            }
+            if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                time = 0;
             }
         }
 
-        // Player attack collisions
+        // Player attack collisions Right
         for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
             if (player.slashHitboxR.intersects(enemyArrayListWorld1.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
                 time += i;
+                System.out.println("EnemyR: " + time);
                 if (time<duration) {
                     enemyArrayListWorld1.get(j).setState(STATE.INVISIBLE);
                     enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(500000, 5000000);
                     score += 10;
                 }
             }
-            if (player.slashHitboxR.intersects(enemyArrayListWorld1.get(j).Enemyhitbox) && !gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+            if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
                 time = 0;
             }
         }
 
         for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
             if (player.slashHitboxR.intersects(enemyArrayListWorld2.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
-                //time += i;
+                time += i;
+                System.out.println("EnemyR: " + time);
                 if (time<duration) {
                     enemyArrayListWorld2.get(j).setState(STATE.INVISIBLE);
                     enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(500000, 5000000);
@@ -135,14 +159,21 @@ public class Boot extends Scene {
         }
 
         if (player.slashHitboxR.intersects(boss.Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 3) {
-            if (boss.lives > 0) {
-                boss.lives -= 1;
-            } else {
-                boss.setState(STATE.INVISIBLE);
-                boss.Enemyhitbox.setLocation(500000, 500000);
+            time += i;
+            if (time<duration) {
+                if (boss.lives > 0) {
+                    boss.lives -= 1;
+                } else {
+                    boss.setState(STATE.INVISIBLE);
+                    boss.Enemyhitbox.setLocation(500000, 500000);
+                }
+            }
+            if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                time = 0;
             }
         }
 
+        // Player intersect with The flag
         if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20 && activeWorld == 1){
             activeWorld = 2;
             win.flagHitbox.setLocation(500000,500000);
@@ -159,11 +190,12 @@ public class Boot extends Scene {
             }
         }
 
+        // Boss die
         if (boss == null && activeWorld == 3) {
             System.out.println("You win!");
         }
 
-        // Player collision Y
+        // Player collision World Y
         if (world.collidesWith(player.playerHitbox) && activeWorld == 1 ||
                 world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 ||
                 world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
@@ -188,7 +220,7 @@ public class Boot extends Scene {
             }
         }
 
-        // Player collision X
+        // Player collision World X
         player.playerHitbox.setX( player.playerHitbox.getX() + player.xPlayer );
         player.slashHitboxR.setX( player.slashHitboxR.getX() + player.xPlayer );
         player.slashHitboxL.setX( player.slashHitboxL.getX() + player.xPlayer );
@@ -203,7 +235,7 @@ public class Boot extends Scene {
             player.xPlayer = 0;
         }
 
-        System.out.println(boss.lives);
+        //System.out.println(boss.lives);
     }
 
     @Override

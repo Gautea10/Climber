@@ -67,7 +67,7 @@ public class EnemyBoss extends Scene {
         //        new Image("sprites/bossRight4.png")
         // };
 
-        int sprspeed = 63;
+        int sprspeed = 150;
 
         int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
 

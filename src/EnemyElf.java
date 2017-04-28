@@ -17,20 +17,20 @@ public class EnemyElf extends Scene  {
     private World2 world2;
 
     public EnemyElf(World2 world2) {
-            super();
-            setPriority(5);
-            System.out.println("EnemyElf Ran");
-            this.world2 = world2;
-            }
+        super();
+        setPriority(5);
+        System.out.println("EnemyElf Ran");
+        this.world2 = world2;
+    }
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
-            {
+    {
 
-            graphics.setColor(Color.red);
-            graphics.setColor(Color.white);
-            sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
+        graphics.setColor(Color.red);
+        graphics.setColor(Color.white);
+        sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
 
-            }
+    }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
 
@@ -55,13 +55,15 @@ public class EnemyElf extends Scene  {
 
     public void init(GameContainer gc) throws SlickException {
             Image[] elf = {
-                    new Image("sprites/elfidle.png"),
-                    new Image("sprites/elfidle.png")
+                    new Image("sprites/elfidle1.png"),
+                    new Image("sprites/elfidle2.png"),
+                    new Image("sprites/elfidle3.png"),
+                    new Image("sprites/elfidle4.png")
             };
 
-            int sprspeed = 63;
+            int sprspeed = 100;
 
-            int[] duration = {sprspeed, sprspeed};
+            int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
 
             sprite = new Animation(elf, duration, true);
 

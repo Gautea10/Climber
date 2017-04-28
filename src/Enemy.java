@@ -20,9 +20,6 @@ public class Enemy extends Scene  {
     public Shape Enemyhitbox;
     private World world;
 
-
-
-
     public Enemy(World world) {
         super();
         setPriority(4);
@@ -32,11 +29,8 @@ public class Enemy extends Scene  {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
-
-        graphics.setColor(Color.red);
         graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
-
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -58,13 +52,6 @@ public class Enemy extends Scene  {
             Enemyhitbox.setX(Enemyhitbox.getX() - xEnemy);
             xEnemy = 0;
         }
-
-        if (world.collidesWith(Enemyhitbox)){
-
-        }
-
-
-
     }
 
     public void init(GameContainer gc) throws SlickException {

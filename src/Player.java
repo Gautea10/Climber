@@ -20,7 +20,7 @@ public class Player extends Scene {
 
     private static float gravity = 0.5f;
     public static float jumpStrength = -13;
-    private static float speed = 12;
+    private static float speed = 10;
 
     //private Animation player;
     public Shape playerHitbox, slashHitboxR, slashHitboxL;
@@ -179,7 +179,7 @@ public class Player extends Scene {
         sprite = idle;
 
         playerHitbox  = new Rectangle(xPlayer-20,yPlayer,45,80);
-        System.out.println(yPlayer);
+        //System.out.println(yPlayer);
 
         // Attack sprite
         slashR = new Animation(pickAxeSlashR, duration3, false);
