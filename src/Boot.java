@@ -129,23 +129,6 @@ public class Boot extends Scene {
             player.slashHitboxL.setX( player.slashHitboxL.getX() - player.xPlayer );
             player.xPlayer = 0;
         }
-
-        /*
-        // Enemy Collisions
-        if(world2.collidesWithWorld2(enemy.Enemyhitbox)) {
-            enemy.Enemyhitbox.setY (enemy.Enemyhitbox.getY() - enemy.yEnemy);
-            enemy.yEnemy = 0;
-        }
-
-        // Collision X
-        enemy.Enemyhitbox.setX (enemy.Enemyhitbox.getX() + enemy.xEnemy);
-
-        if (world2.collidesWithWorld2(enemy.Enemyhitbox)) {
-            enemy.Enemyhitbox.setX(enemy.Enemyhitbox.getX() - enemy.xEnemy);
-            enemy.xEnemy = 0;
-        }*/
-
-
     }
 
     @Override
