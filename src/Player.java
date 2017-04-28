@@ -55,8 +55,6 @@ public class Player extends Scene {
     {
         yPlayer += gravity;
 
-        System.out.println(time);
-
         // Collision in Y
         playerHitbox.setY(playerHitbox.getY() + yPlayer);
         slashHitboxR.setY(slashHitboxR.getY() + yPlayer);

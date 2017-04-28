@@ -8,7 +8,8 @@ import java.util.Random;
 public class Boot extends Scene {
 
     private ArrayList<Enemy> enemyArrayListWorld1;
-    private ArrayList<Enemy> enemyArrayListWorld2;
+    private ArrayList<EnemyElf> enemyArrayListWorld2;
+    private EnemyBoss boss;
 
     private World world;
     private World2 world2;
@@ -46,6 +47,10 @@ public class Boot extends Scene {
             }
         }
 
+        if (activeWorld == 3) {
+            boss.update(gameContainer, i);
+        }
+
 
         for (int g = 0; g < enemyArrayListWorld1.size(); g++) {
             if (player.playerHitbox.intersects(enemyArrayListWorld1.get(g).Enemyhitbox) && activeWorld == 1) {
@@ -70,6 +75,11 @@ public class Boot extends Scene {
             }
         }
 
+        if (player.playerHitbox.intersects(boss.Enemyhitbox) && activeWorld == 3) {
+            Game.manager.clear();
+            Game.manager.addSence(new MainMenu());
+        }
+
         for (int h = 0; h < enemyArrayListWorld1.size(); h++) {
             if (player.slashHitboxL.intersects(enemyArrayListWorld1.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
                 enemyArrayListWorld1.get(h).setState(STATE.INVISIBLE);
@@ -86,8 +96,14 @@ public class Boot extends Scene {
             }
         }
 
-        System.out.println(time);
-
+        if (player.slashHitboxL.intersects(boss.Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 3) {
+            if (boss.lives > 0) {
+                boss.lives -= 1;
+            } else {
+                boss.setState(STATE.INVISIBLE);
+                boss.Enemyhitbox.setLocation(5000000, 500000);
+            }
+        }
 
         // Player attack collisions
         for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
@@ -118,11 +134,20 @@ public class Boot extends Scene {
             }
         }
 
+        if (player.slashHitboxR.intersects(boss.Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 3) {
+            if (boss.lives > 0) {
+                boss.lives -= 1;
+            } else {
+                boss.setState(STATE.INVISIBLE);
+                boss.Enemyhitbox.setLocation(500000, 500000);
+            }
+        }
+
         if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20 && activeWorld == 1){
             activeWorld = 2;
             win.flagHitbox.setLocation(500000,500000);
             for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
-                enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(5000000, 500000);
+                enemyArrayListWorld1.remove(j);
             }
         }
 
@@ -130,8 +155,12 @@ public class Boot extends Scene {
             activeWorld = 3;
             win.flagHitbox.setLocation(50000000, 500000);
             for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
-                enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(5000000, 500000);
+                enemyArrayListWorld2.remove(j);
             }
+        }
+
+        if (boss == null && activeWorld == 3) {
+            System.out.println("You win!");
         }
 
         // Player collision Y
@@ -173,6 +202,8 @@ public class Boot extends Scene {
             player.slashHitboxL.setX( player.slashHitboxL.getX() - player.xPlayer );
             player.xPlayer = 0;
         }
+
+        System.out.println(boss.lives);
     }
 
     @Override
@@ -192,6 +223,7 @@ public class Boot extends Scene {
         }
         if (activeWorld == 3) {
             world3.render(gameContainer, graphics);
+            boss.render(gameContainer, graphics);
         }
 
         player.render(gameContainer, graphics);
@@ -282,11 +314,15 @@ public class Boot extends Scene {
         enemyArrayListWorld2 = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            enemyArrayListWorld2.add(i, new Enemy(world));
+            enemyArrayListWorld2.add(i, new EnemyElf(world2));
             enemyArrayListWorld2.get(i).init(gameContainer);
             Rectangle random = rectanglesWorld2.get(randomizer.nextInt(rectanglesWorld2.size()));
             enemyArrayListWorld2.get(i).Enemyhitbox.setLocation(randomizer.nextInt((int) random.getWidth()) + random.getX(), randomizer.nextInt((int) random.getHeight()) + random.getY());
         }
+
+        boss = new EnemyBoss(world3);
+        boss.init(gameContainer);
+        boss.Enemyhitbox.setLocation(512, 30);
     }
 
     public String toString()
