@@ -55,12 +55,13 @@ public class EnemyElf extends Scene  {
 
     public void init(GameContainer gc) throws SlickException {
             Image[] elf = {
-            new Image("sprites/elfidle.png")
+                    new Image("sprites/elfidle.png"),
+                    new Image("sprites/elfidle.png")
             };
 
             int sprspeed = 63;
 
-            int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
+            int[] duration = {sprspeed, sprspeed};
 
             sprite = new Animation(elf, duration, true);
 

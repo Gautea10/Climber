@@ -13,6 +13,7 @@ public class EnemyBoss extends Scene {
     private static float gravity = 0.02f;
     public Shape Enemyhitbox;
     private World3 world3;
+    public int lives = 5;
 
     public EnemyBoss(World3 world3) {
         super();
@@ -72,7 +73,7 @@ public class EnemyBoss extends Scene {
 
         sprite = new Animation(Boss, duration, true);
 
-        Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 80);
+        Enemyhitbox = new Rectangle(xEnemy, yEnemy, 119 ,95);
     }
 
 
