@@ -16,9 +16,7 @@ public class Win extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException {
         // Flag
-        graphics.setColor(Color.yellow);
         flag.draw(flagHitbox.getX(), flagHitbox.getY());
-        graphics.draw(flagHitbox);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -68,4 +66,3 @@ public class Win extends Scene {
         this.flag = flag;
     }
 }
-
