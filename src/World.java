@@ -1,10 +1,6 @@
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Created by Gaute on 4/23/2017.
@@ -16,6 +12,8 @@ public class World extends Scene {
     private Shape levelBase, baseR, baseL;
     private Shape platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8;
 
+    Image background;
+
     public World() {
         super();
         setPriority(2);
@@ -24,6 +22,7 @@ public class World extends Scene {
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
         graphics.clear();
+        graphics.drawImage(background, 0, 0);
         graphics.setColor(Color.white);
 
         // Base of level
@@ -74,6 +73,8 @@ public class World extends Scene {
         platform6 = new Rectangle(0,220,200,50);
         platform7 = new Rectangle(1024-200,240,200,50);
         platform8 = new Rectangle(1024/2 - 250,100,500,40);
+
+        background = new Image("sprites/world1Bg.png");
     }
 
     public boolean collidesWith(Shape s)

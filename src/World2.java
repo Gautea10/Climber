@@ -1,7 +1,4 @@
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -13,8 +10,9 @@ public class World2 extends Scene {
     private Shape levelBase, baseR, baseL;
     private Shape platform9, platform10, platform11,
             platform12, platform13, platform14,
-            platform15, platform16, platform17,
-            platform18;
+            platform15, platform16, platform17;
+
+    Image background2;
 
     public World2() {
         super();
@@ -24,6 +22,7 @@ public class World2 extends Scene {
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
         graphics.clear();
+        graphics.drawImage(background2, 0, 0);
         graphics.setColor(Color.green);
 
         // Base of level
@@ -77,7 +76,9 @@ public class World2 extends Scene {
         platform15 = new Rectangle(50,205,200,50);
         platform16 = new Rectangle(774,205,200,50);
         platform17 = new Rectangle(387,100,250,40);
-        platform18 = new Rectangle(337,120,350,40);
+        //platform18 = new Rectangle(337,120,350,40);
+
+        background2 = new Image("sprites/world2Bg.png");
     }
 
     public boolean collidesWithWorld2(Shape s)
