@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Boot extends Scene {
 
-    ArrayList<Enemy> enemyArrayList;
+    ArrayList<Enemy> enemyArrayListWorld1;
+    ArrayList<Enemy> enemyArrayListWorld2;
 
     private World world;
     private World2 world2;
@@ -27,38 +28,75 @@ public class Boot extends Scene {
         world3.update(gameContainer, i);
         player.update(gameContainer, i);
 
-        for (int l = 0; l < enemyArrayList.size(); l++){
-            enemyArrayList.get(l).update(gameContainer, i);
+        for (int l = 0; l < enemyArrayListWorld1.size(); l++){
+            enemyArrayListWorld1.get(l).update(gameContainer, i);
+            enemyArrayListWorld2.get(l).update(gameContainer, i);
         }
 
 
-        for (int g = 0; g < enemyArrayList.size(); g++) {
-            if (player.playerHitbox.intersects(enemyArrayList.get(g).Enemyhitbox)) {
+        for (int g = 0; g < enemyArrayListWorld1.size(); g++) {
+            if (player.playerHitbox.intersects(enemyArrayListWorld1.get(g).Enemyhitbox) && activeWorld == 1) {
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
+                System.out.println("37");
             }
         }
 
-        for (int h = 0; h < enemyArrayList.size(); h++) {
-            if (player.slashHitboxL.intersects(enemyArrayList.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
-                enemyArrayList.get(h).setState(STATE.INVISIBLE);
-                enemyArrayList.get(h).Enemyhitbox.setLocation(500000,500000);
+        for (int g = 0; g < enemyArrayListWorld2.size(); g++) {
+            if (player.playerHitbox.intersects(enemyArrayListWorld2.get(g).Enemyhitbox) && activeWorld == 2) {
+                Game.manager.clear();
+                Game.manager.addSence(new MainMenu());
+                System.out.println("45");
+            }
+        }
+
+        for (int h = 0; h < enemyArrayListWorld1.size(); h++) {
+            if (player.slashHitboxL.intersects(enemyArrayListWorld1.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
+                enemyArrayListWorld1.get(h).setState(STATE.INVISIBLE);
+                enemyArrayListWorld1.get(h).Enemyhitbox.setLocation(500000,500000);
                 score += 10;
             }
         }
 
-        for (int j = 0; j < enemyArrayList.size(); j++) {
-            if (player.slashHitboxR.intersects(enemyArrayList.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
-                enemyArrayList.get(j).setState(STATE.INVISIBLE);
-                enemyArrayList.get(j).Enemyhitbox.setLocation(500000, 5000000);
+        for (int h = 0; h < enemyArrayListWorld2.size(); h++) {
+            if (player.slashHitboxL.intersects(enemyArrayListWorld2.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
+                enemyArrayListWorld2.get(h).setState(STATE.INVISIBLE);
+                enemyArrayListWorld2.get(h).Enemyhitbox.setLocation(500000,500000);
+                score += 10;
+            }
+        }
+
+        for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
+            if (player.slashHitboxR.intersects(enemyArrayListWorld1.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
+                enemyArrayListWorld1.get(j).setState(STATE.INVISIBLE);
+                enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(500000, 5000000);
+                score += 10;
+            }
+        }
+
+        for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
+            if (player.slashHitboxR.intersects(enemyArrayListWorld2.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
+                enemyArrayListWorld2.get(j).setState(STATE.INVISIBLE);
+                enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(500000, 5000000);
                 score += 10;
             }
         }
 
 
-        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20){
+        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20 && activeWorld == 1){
             activeWorld = 2;
             win.flagHitbox.setLocation(500000,500000);
+            for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
+                enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(5000000, 500000);
+            }
+        }
+
+        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 50 && activeWorld == 2) {
+            activeWorld = 3;
+            win.flagHitbox.setLocation(50000000, 500000);
+            for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
+                enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(5000000, 500000);
+            }
         }
 
         // Player collision Y
@@ -115,9 +153,15 @@ public class Boot extends Scene {
 
         if (activeWorld == 1) {
             world.render(gameContainer, graphics);
+            for (int i = 0; i < enemyArrayListWorld1.size(); i++) {
+                enemyArrayListWorld1.get(i).render(gameContainer, graphics);
+            }
         }
         if (activeWorld == 2) {
             world2.render(gameContainer, graphics);
+            for (int i = 0; i < enemyArrayListWorld2.size(); i++) {
+                enemyArrayListWorld2.get(i).render(gameContainer, graphics);
+            }
         }
         if (activeWorld == 3) {
             world3.render(gameContainer, graphics);
@@ -125,20 +169,21 @@ public class Boot extends Scene {
 
         player.render(gameContainer, graphics);
 
-        for (int i = 0; i < enemyArrayList.size(); i++) {
-            enemyArrayList.get(i).render(gameContainer, graphics);
+
+        if (score >= 20 && activeWorld == 1) {
+            win.render(gameContainer, graphics);
         }
 
-        if (score >= 20) {
+        if (score >= 50 && activeWorld == 2) {
+            win.getFlagHitbox().setLocation(512, 580);
             win.render(gameContainer, graphics);
-
         }
         graphics.drawString("Score: " + score,10, 50);
     }
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-        // Creates world and player
+        // Creates world, player and enemies
 
         world = new World();
         world.init(gameContainer);
@@ -155,13 +200,18 @@ public class Boot extends Scene {
         win = new Win();
         win.init(gameContainer);
 
-        enemyArrayList = new ArrayList<>();
+        enemyArrayListWorld1 = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            enemyArrayList.add(i, new Enemy(world));
-            enemyArrayList.get(i).init(gameContainer);
-            System.out.println(enemyArrayList.get(i).Enemyhitbox.getX());
-            System.out.println(enemyArrayList.get(i).Enemyhitbox.getY());
+            enemyArrayListWorld1.add(i, new Enemy(world));
+            enemyArrayListWorld1.get(i).init(gameContainer);
+        }
+
+        enemyArrayListWorld2 = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            enemyArrayListWorld2.add(i, new Enemy(world));
+            enemyArrayListWorld2.get(i).init(gameContainer);
         }
     }
 
