@@ -4,17 +4,15 @@ import java.util.ArrayList;
 
 public class Boot extends Scene {
 
-    //private World world;
-    //private Player player;
     ArrayList<Enemy> enemyArrayList;
 
     private World world;
     private World2 world2;
     private World3 world3;
     private Player player;
-    private Enemy enemy;
     private Win win;
     private int score = 0;
+    private int activeWorld = 1;
 
     public Boot() {
         super();
@@ -57,8 +55,14 @@ public class Boot extends Scene {
             }
         }
 
+
+        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20){
+            activeWorld = 2;
+            win.flagHitbox.setLocation(500000,500000);
+        }
+
         // Player collision Y
-        if(world.collidesWith(player.playerHitbox) /*|| world2.collidesWithWorld2(player.playerHitbox) /*|| world3.collidesWithWorld3(player.playerHitbox)*/) {
+        if (world.collidesWith(player.playerHitbox) && activeWorld == 1 || world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 || world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
             player.playerHitbox.setY(player.playerHitbox.getY() - player.yPlayer );
             player.slashHitboxR.setY( player.slashHitboxR.getY() - player.yPlayer );
             player.slashHitboxL.setY( player.slashHitboxL.getY() - player.yPlayer );
@@ -71,7 +75,7 @@ public class Boot extends Scene {
             player.slashHitboxR.setY(player.slashHitboxR.getY() + 0.1f);
             player.slashHitboxL.setY(player.slashHitboxL.getY() + 0.1f);
 
-            if(world.collidesWith(player.playerHitbox) /*|| world2.collidesWithWorld2(player.playerHitbox) /*|| world3.collidesWithWorld3(player.playerHitbox)*/) {
+            if(world.collidesWith(player.playerHitbox) && activeWorld == 1 || world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 || world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
                 player.yPlayer = player.jumpStrength;
             }
         }
@@ -81,7 +85,7 @@ public class Boot extends Scene {
         player.slashHitboxR.setX( player.slashHitboxR.getX() + player.xPlayer );
         player.slashHitboxL.setX( player.slashHitboxL.getX() + player.xPlayer );
 
-        if (world.collidesWith(player.playerHitbox) /*|| world2.collidesWithWorld2(player.playerHitbox) /*|| world3.collidesWithWorld3(player.playerHitbox)*/) {
+        if (world.collidesWith(player.playerHitbox) && activeWorld == 1 || world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 || world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
             player.playerHitbox.setX( player.playerHitbox.getX() - player.xPlayer );
             player.slashHitboxR.setX( player.slashHitboxR.getX() - player.xPlayer );
             player.slashHitboxL.setX( player.slashHitboxL.getX() - player.xPlayer );
@@ -102,20 +106,33 @@ public class Boot extends Scene {
             enemy.Enemyhitbox.setX(enemy.Enemyhitbox.getX() - enemy.xEnemy);
             enemy.xEnemy = 0;
         }*/
+
+
     }
 
     @Override
     public void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        world.render(gameContainer,graphics);
-        //world2.render(gameContainer, graphics);
-        //world3.render(gameContainer, graphics);
+
+        if (activeWorld == 1) {
+            world.render(gameContainer, graphics);
+        }
+        if (activeWorld == 2) {
+            world2.render(gameContainer, graphics);
+        }
+        if (activeWorld == 3) {
+            world3.render(gameContainer, graphics);
+        }
 
         player.render(gameContainer, graphics);
+
         for (int i = 0; i < enemyArrayList.size(); i++) {
             enemyArrayList.get(i).render(gameContainer, graphics);
         }
 
-        win.render(gameContainer, graphics);
+        if (score >= 20) {
+            win.render(gameContainer, graphics);
+
+        }
         graphics.drawString("Score: " + score,10, 50);
     }
 
@@ -140,9 +157,11 @@ public class Boot extends Scene {
 
         enemyArrayList = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             enemyArrayList.add(i, new Enemy(world));
             enemyArrayList.get(i).init(gameContainer);
+            System.out.println(enemyArrayList.get(i).Enemyhitbox.getX());
+            System.out.println(enemyArrayList.get(i).Enemyhitbox.getY());
         }
     }
 
