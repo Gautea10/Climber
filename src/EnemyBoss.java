@@ -1,33 +1,24 @@
 import org.newdawn.slick.*;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-
-
-public class Enemy extends Scene  {
-
+/**
+ * Created by HEH on 28.04.2017.
+ */
+public class EnemyBoss extends Scene {
 
     private Animation sprite;
     private float yEnemy = 0;
     private float xEnemy = 0;
     private static float gravity = 0.02f;
     public Shape Enemyhitbox;
-    private World world;
+    private World3 world3;
 
-
-
-
-    public Enemy(World world) {
+    public EnemyBoss(World3 world3) {
         super();
-        setPriority(4);
-        System.out.println("Enemy Ran");
-        this.world = world;
+        setPriority(5);
+        System.out.println("EnemyElf Ran");
+        this.world3 = world3;
     }
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
@@ -46,47 +37,46 @@ public class Enemy extends Scene  {
         // Collision in Y
         Enemyhitbox.setY(Enemyhitbox.getY() + yEnemy);
 
-        if(world.collidesWith(Enemyhitbox)) {
-            Enemyhitbox.setY (Enemyhitbox.getY() - yEnemy);
+        if (world3.collidesWithWorld3(Enemyhitbox)) {
+            Enemyhitbox.setY(Enemyhitbox.getY() - yEnemy);
             yEnemy = 0;
         }
 
         // Collision X
-        Enemyhitbox.setX (Enemyhitbox.getX() + xEnemy);
+        Enemyhitbox.setX(Enemyhitbox.getX() + xEnemy);
 
-        if (world.collidesWith(Enemyhitbox)) {
+        if (world3.collidesWithWorld3(Enemyhitbox)) {
             Enemyhitbox.setX(Enemyhitbox.getX() - xEnemy);
             xEnemy = 0;
         }
-
-        if (world.collidesWith(Enemyhitbox)){
-
-        }
-
-
-
     }
 
     public void init(GameContainer gc) throws SlickException {
-        Image[] Ghost = {
-                new Image("sprites/ghost.png"),
-                new Image("sprites/ghost2.png"),
-                new Image("sprites/ghost3.png"),
-                new Image("sprites/ghost4.png")
+        Image[] Boss = {
+                new Image("sprites/bossLeft1.png"),
+                new Image("sprites/bossLeft2.png"),
+                new Image("sprites/bossLeft3.png"),
+                new Image("sprites/bossLeft4.png")
         };
+
+        // Image[] BossLeft = {
+        //       new Image("sprites/bossRight1.png"),
+        //        new Image("sprites/bossRight2.png"),
+        //        new Image("sprites/bossRight3.png"),
+        //        new Image("sprites/bossRight4.png")
+        // };
 
         int sprspeed = 63;
 
         int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
 
-        sprite = new Animation(Ghost, duration, true);
+        sprite = new Animation(Boss, duration, true);
 
         Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 80);
     }
 
 
     public String toString() {
-        return "Sence4";
+        return "Sence5";
     }
 }
-
