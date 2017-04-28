@@ -71,9 +71,9 @@ public class World3 extends Scene {
         platform20 = new Rectangle(0, 500, 200, 50);
         platform21 = new Rectangle(824, 500, 200, 50);
         platform22 = new Rectangle(162, 350, 100, 50);
-        platform23 = new Rectangle(50,130,200,50);
+        platform23 = new Rectangle(60,130,200,50);
         platform24 = new Rectangle(387,210,250,40);
-        platform25 = new Rectangle(774,130,200,50);
+        platform25 = new Rectangle(764,130,200,50);
         platform26 = new Rectangle(762,350,100,50);
 
         background3 = new Image("sprites/world3Bg.png");
