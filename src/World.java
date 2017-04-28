@@ -29,8 +29,7 @@ public class World extends Scene {
 
         // Base of level
         graphics.draw(levelBase);
-        graphics.texture(levelBase,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(levelBase,groundTexture,0,10);
         graphics.draw(baseR);
         graphics.fill(baseR);
         graphics.draw(baseL);
@@ -38,29 +37,23 @@ public class World extends Scene {
 
         // Platforms
         graphics.draw(platform1);
-        graphics.texture(platform1,groundTexture,platform1.getX(),platform1.getY());
+        graphics.texture(platform1,groundTexture,0,10);
 
         //graphics.fill(platform1);
         graphics.draw(platform2);
-        graphics.texture(platform2,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(platform2,groundTexture,0,10);
         graphics.draw(platform3);
-        graphics.texture(platform3,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(platform3,groundTexture,0,10);
         graphics.draw(platform4);
-        graphics.texture(platform4,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(platform4,groundTexture,0,10);
         graphics.draw(platform5);
-        graphics.texture(platform5,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(platform5,groundTexture,0,10);
         graphics.draw(platform6);
-        graphics.texture(platform6,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(platform6,groundTexture,0,10);
         graphics.draw(platform7);
-        graphics.texture(platform7,groundTexture,platform1.getX(),platform1.getY());
-
+        graphics.texture(platform7,groundTexture,0,1);
         graphics.draw(platform8);
-        graphics.texture(platform8,groundTexture,platform1.getX(),platform1.getY());
+        graphics.texture(platform8,groundTexture,0,10);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {

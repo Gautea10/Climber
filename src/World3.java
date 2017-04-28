@@ -1,7 +1,4 @@
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
@@ -15,6 +12,9 @@ public class World3 extends Scene {
             platform21, platform22, platform23,
             platform24, platform25, platform26;
 
+    Image background3;
+    Image groundTexture3;
+
     public World3() {
         super();
         setPriority(4);
@@ -23,11 +23,12 @@ public class World3 extends Scene {
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
         graphics.clear();
+        graphics.drawImage(background3, 0, 0);
         graphics.setColor(Color.red);
 
         // Base of level
         graphics.draw(levelBase);
-        graphics.fill(levelBase);
+        graphics.texture(levelBase,groundTexture3,0,10);
         graphics.draw(baseR);
         graphics.fill(baseR);
         graphics.draw(baseL);
@@ -35,23 +36,23 @@ public class World3 extends Scene {
 
         // Platforms
         graphics.draw(platform18);
-        graphics.fill(platform18);
+        graphics.texture(platform18,groundTexture3,0,10);
         graphics.draw(platform19);
-        graphics.fill(platform19);
+        graphics.texture(platform19,groundTexture3,0,10);;
         graphics.draw(platform20);
-        graphics.fill(platform20);
+        graphics.texture(platform20,groundTexture3,0,10);
         graphics.draw(platform21);
-        graphics.fill(platform21);
+        graphics.texture(platform21,groundTexture3,0,10);
         graphics.draw(platform22);
-        graphics.fill(platform22);
+        graphics.texture(platform22,groundTexture3,0,10);
         graphics.draw(platform23);
-        graphics.fill(platform23);
+        graphics.texture(platform23,groundTexture3,0,10);
         graphics.draw(platform24);
-        graphics.fill(platform24);
+        graphics.texture(platform24,groundTexture3,0,10);
         graphics.draw(platform25);
-        graphics.fill(platform25);
+        graphics.texture(platform25,groundTexture3,0,10);
         graphics.draw(platform26);
-        graphics.fill(platform26);
+        graphics.texture(platform26,groundTexture3,0,10);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -61,8 +62,8 @@ public class World3 extends Scene {
     public void init(GameContainer gameContainer) throws SlickException {
 
         levelBase = new Rectangle(0,680,1024,100);
-        baseR = new Rectangle(0 - 100,0,100,2560);
-        baseL = new Rectangle(1024,0,100,2560);
+        baseR = new Rectangle(0 - 100,-500,100,2560);
+        baseL = new Rectangle(1024,-500,100,2560);
 
         // Platforms
         platform18 = new Rectangle(624, 550, 100, 30);
@@ -74,6 +75,9 @@ public class World3 extends Scene {
         platform24 = new Rectangle(387,210,250,40);
         platform25 = new Rectangle(774,130,200,50);
         platform26 = new Rectangle(762,350,100,50);
+
+        background3 = new Image("sprites/world3Bg.png");
+        groundTexture3 = new Image("sprites/world2Texture.png");
     }
 
     public boolean collidesWithWorld3(Shape s)

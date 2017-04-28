@@ -13,6 +13,7 @@ public class World2 extends Scene {
             platform15, platform16, platform17;
 
     Image background2;
+    Image groundTexture2;
 
     public World2() {
         super();
@@ -27,7 +28,7 @@ public class World2 extends Scene {
 
         // Base of level
         graphics.draw(levelBase);
-        graphics.fill(levelBase);
+        graphics.texture(levelBase,groundTexture2,0,10);
         graphics.draw(baseR);
         graphics.fill(baseR);
         graphics.draw(baseL);
@@ -35,23 +36,23 @@ public class World2 extends Scene {
 
         // Platforms
         graphics.draw(platform9);
-        graphics.fill(platform9);
+        graphics.texture(platform9,groundTexture2,0,10);
         graphics.draw(platform10);
-        graphics.fill(platform10);
+        graphics.texture(platform10,groundTexture2,0,10);
         graphics.draw(platform11);
-        graphics.fill(platform11);
+        graphics.texture(platform11,groundTexture2,0,10);
         graphics.draw(platform12);
-        graphics.fill(platform12);
+        graphics.texture(platform12,groundTexture2,0,10);
         graphics.draw(platform13);
-        graphics.fill(platform13);
+        graphics.texture(platform13,groundTexture2,0,10);
         graphics.draw(platform14);
-        graphics.fill(platform14);
+        graphics.texture(platform14,groundTexture2,0,10);
         graphics.draw(platform15);
-        graphics.fill(platform15);
+        graphics.texture(platform15,groundTexture2,0,10);
         graphics.draw(platform16);
-        graphics.fill(platform16);
+        graphics.texture(platform16,groundTexture2,0,10);
         graphics.draw(platform17);
-        graphics.fill(platform17);
+        graphics.texture(platform17,groundTexture2,0,10);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -61,8 +62,8 @@ public class World2 extends Scene {
     public void init(GameContainer gameContainer) throws SlickException {
 
         levelBase = new Rectangle(0,680,1024,100);
-        baseR = new Rectangle(0 - 100,0,100,2560);
-        baseL = new Rectangle(1024,0,100,2560);
+        baseR = new Rectangle(0 - 100,-500,100,2560);
+        baseL = new Rectangle(1024,-500,100,2560);
 
         // Platforms
         platform9 = new Rectangle(624, 535, 50, 50);
@@ -79,6 +80,7 @@ public class World2 extends Scene {
         //platform18 = new Rectangle(337,120,350,40);
 
         background2 = new Image("sprites/world2Bg.png");
+        groundTexture2 = new Image("sprites/world2Texture.png");
     }
 
     public boolean collidesWithWorld2(Shape s)
