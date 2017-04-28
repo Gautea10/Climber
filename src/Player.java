@@ -1,3 +1,4 @@
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -25,6 +26,8 @@ public class Player extends Scene {
     public Shape playerHitbox, slashHitboxR, slashHitboxL;
 
     int LorR = 0;
+    int time = 0;
+    int duration = 100;
 
     private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL;
     public float xPlayer = 1024 / 2;
@@ -40,13 +43,19 @@ public class Player extends Scene {
     {
         // Player
         sprite.draw(playerHitbox.getX(), playerHitbox.getY());
-        slashSpriteR.draw(playerHitbox.getX() - 5, playerHitbox.getY());
+        slashSpriteR.draw(playerHitbox.getX(), playerHitbox.getY());
         slashSpriteL.draw(playerHitbox.getX() - 40, playerHitbox.getY());
+
+        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
+            slashSpriteR.setCurrentFrame(1);
+        }
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
     {
         yPlayer += gravity;
+
+        System.out.println(time);
 
         // Collision in Y
         playerHitbox.setY(playerHitbox.getY() + yPlayer);
@@ -80,11 +89,29 @@ public class Player extends Scene {
 
         // Pickaxe slash
         if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
-            slashSpriteR.setCurrentFrame(1);
+            time += i;
+            if (time<duration) {
+                slashSpriteR.setCurrentFrame(1);
+            }
+            else {
+                slashSpriteR.setCurrentFrame(0);
+            }
+        }
+        else if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+            time = 0;
         }
 
         if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 1) {
-            slashSpriteL.setCurrentFrame(1);
+            time += i;
+            if (time<duration) {
+                slashSpriteL.setCurrentFrame(1);
+            }
+            else {
+                slashSpriteL.setCurrentFrame(0);
+            }
+        }
+        else if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+            time = 0;
         }
     }
 
