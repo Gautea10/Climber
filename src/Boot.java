@@ -14,6 +14,7 @@ public class Boot extends Scene {
     private Player player;
     private Enemy enemy;
     private Win win;
+    private int score = 0;
 
     public Boot() {
         super();
@@ -44,6 +45,7 @@ public class Boot extends Scene {
             if (player.slashHitboxL.intersects(enemyArrayList.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
                 enemyArrayList.get(h).setState(STATE.INVISIBLE);
                 enemyArrayList.get(h).Enemyhitbox.setLocation(500000,500000);
+                score += 10;
             }
         }
 
@@ -51,6 +53,7 @@ public class Boot extends Scene {
             if (player.slashHitboxR.intersects(enemyArrayList.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
                 enemyArrayList.get(j).setState(STATE.INVISIBLE);
                 enemyArrayList.get(j).Enemyhitbox.setLocation(500000, 5000000);
+                score += 10;
             }
         }
 
@@ -113,6 +116,7 @@ public class Boot extends Scene {
         }
 
         win.render(gameContainer, graphics);
+        graphics.drawString("Score: " + score,10, 50);
     }
 
     @Override
