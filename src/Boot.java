@@ -55,8 +55,10 @@ public class Boot extends Scene {
             }
         }
 
+
         if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20){
             activeWorld = 2;
+            win.flagHitbox.setLocation(500000,500000);
         }
 
         // Player collision Y
@@ -129,6 +131,7 @@ public class Boot extends Scene {
 
         if (score >= 20) {
             win.render(gameContainer, graphics);
+
         }
         graphics.drawString("Score: " + score,10, 50);
     }
