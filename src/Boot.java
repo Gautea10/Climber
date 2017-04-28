@@ -155,16 +155,6 @@ public class Boot extends Scene {
 
         player.render(gameContainer, graphics);
 
-        /*
-        graphics.draw(r1);
-        graphics.draw(r2);
-        graphics.draw(r3);
-        graphics.draw(r4);
-        graphics.draw(r5);
-        graphics.draw(r6);
-        graphics.draw(r7);
-        graphics.draw(r8);
-        */
         if (score >= 20 && activeWorld == 1) {
             win.render(gameContainer, graphics);
         }
@@ -204,16 +194,16 @@ public class Boot extends Scene {
         Rectangle r7 = new Rectangle(770,300,220,270);
         Rectangle r8 = new Rectangle(150, 580,700, 80);
 
-        ArrayList<Rectangle> rectangles = new ArrayList<>();
+        ArrayList<Rectangle> rectanglesWorld1 = new ArrayList<>();
 
-        rectangles.add(r1);
-        rectangles.add(r2);
-        rectangles.add(r3);
-        rectangles.add(r4);
-        rectangles.add(r5);
-        rectangles.add(r6);
-        rectangles.add(r7);
-        rectangles.add(r8);
+        rectanglesWorld1.add(r1);
+        rectanglesWorld1.add(r2);
+        rectanglesWorld1.add(r3);
+        rectanglesWorld1.add(r4);
+        rectanglesWorld1.add(r5);
+        rectanglesWorld1.add(r6);
+        rectanglesWorld1.add(r7);
+        rectanglesWorld1.add(r8);
 
         Random randomizer = new Random();
 
@@ -222,15 +212,39 @@ public class Boot extends Scene {
         for (int i = 0; i < 10; i++) {
             enemyArrayListWorld1.add(i, new Enemy(world));
             enemyArrayListWorld1.get(i).init(gameContainer);
-            Rectangle random = rectangles.get(randomizer.nextInt(rectangles.size()));
+            Rectangle random = rectanglesWorld1.get(randomizer.nextInt(rectanglesWorld1.size()));
             enemyArrayListWorld1.get(i).Enemyhitbox.setLocation(randomizer.nextInt((int) random.getWidth()) + random.getX(), randomizer.nextInt((int) random.getHeight()) + random.getY());
         }
+
+        Rectangle r9 = new Rectangle(20, 40, 240,160);
+        Rectangle r10 = new Rectangle(770,40,240, 160);
+        Rectangle r11 = new Rectangle(270,10, 480, 80);
+        Rectangle r12 = new Rectangle(280,170, 180,170);
+        Rectangle r13 = new Rectangle(570, 170, 180, 170);
+        Rectangle r14 = new Rectangle(20, 270, 140, 220);
+        Rectangle r15 = new Rectangle(850,270,140,220);
+        Rectangle r16 = new Rectangle(100, 590,360, 80);
+        Rectangle r17 = new Rectangle(570,590,360,80);
+
+        ArrayList<Rectangle> rectanglesWorld2 = new ArrayList<>();
+
+        rectanglesWorld2.add(r9);
+        rectanglesWorld2.add(r10);
+        rectanglesWorld2.add(r11);
+        rectanglesWorld2.add(r12);
+        rectanglesWorld2.add(r13);
+        rectanglesWorld2.add(r14);
+        rectanglesWorld2.add(r15);
+        rectanglesWorld2.add(r16);
+        rectanglesWorld2.add(r17);
 
         enemyArrayListWorld2 = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
             enemyArrayListWorld2.add(i, new Enemy(world));
             enemyArrayListWorld2.get(i).init(gameContainer);
+            Rectangle random = rectanglesWorld2.get(randomizer.nextInt(rectanglesWorld2.size()));
+            enemyArrayListWorld2.get(i).Enemyhitbox.setLocation(randomizer.nextInt((int) random.getWidth()) + random.getX(), randomizer.nextInt((int) random.getHeight()) + random.getY());
         }
     }
 
