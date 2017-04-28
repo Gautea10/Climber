@@ -1,6 +1,9 @@
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
+import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Boot extends Scene {
 
@@ -152,7 +155,16 @@ public class Boot extends Scene {
 
         player.render(gameContainer, graphics);
 
-
+        /*
+        graphics.draw(r1);
+        graphics.draw(r2);
+        graphics.draw(r3);
+        graphics.draw(r4);
+        graphics.draw(r5);
+        graphics.draw(r6);
+        graphics.draw(r7);
+        graphics.draw(r8);
+        */
         if (score >= 20 && activeWorld == 1) {
             win.render(gameContainer, graphics);
         }
@@ -183,11 +195,35 @@ public class Boot extends Scene {
         win = new Win();
         win.init(gameContainer);
 
+        Rectangle r1 = new Rectangle(20, 50, 240,160);
+        Rectangle r2 = new Rectangle(770,50,240, 160);
+        Rectangle r3 = new Rectangle(270,10, 480, 80);
+        Rectangle r4 = new Rectangle(280,170, 180,170);
+        Rectangle r5 = new Rectangle(570, 170, 180, 170);
+        Rectangle r6 = new Rectangle(20, 280, 220, 270);
+        Rectangle r7 = new Rectangle(770,300,220,270);
+        Rectangle r8 = new Rectangle(150, 580,700, 80);
+
+        ArrayList<Rectangle> rectangles = new ArrayList<>();
+
+        rectangles.add(r1);
+        rectangles.add(r2);
+        rectangles.add(r3);
+        rectangles.add(r4);
+        rectangles.add(r5);
+        rectangles.add(r6);
+        rectangles.add(r7);
+        rectangles.add(r8);
+
+        Random randomizer = new Random();
+
         enemyArrayListWorld1 = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
             enemyArrayListWorld1.add(i, new Enemy(world));
             enemyArrayListWorld1.get(i).init(gameContainer);
+            Rectangle random = rectangles.get(randomizer.nextInt(rectangles.size()));
+            enemyArrayListWorld1.get(i).Enemyhitbox.setLocation(randomizer.nextInt((int) random.getWidth()) + random.getX(), randomizer.nextInt((int) random.getHeight()) + random.getY());
         }
 
         enemyArrayListWorld2 = new ArrayList<>();

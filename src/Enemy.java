@@ -14,8 +14,8 @@ public class Enemy extends Scene  {
 
 
     private Animation sprite;
-    private float yEnemy;
-    private float xEnemy;
+    private float yEnemy = 0;
+    private float xEnemy = 0;
     private static float gravity = 0.02f;
     public Shape Enemyhitbox;
     private World world;
@@ -28,8 +28,6 @@ public class Enemy extends Scene  {
         setPriority(4);
         System.out.println("Enemy Ran");
         this.world = world;
-        this.yEnemy = (float) Math.random() * 500 + 20;
-        this.xEnemy = (float) Math.random() * 700 + 20;
     }
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
