@@ -18,6 +18,9 @@ public class Boot extends Scene {
     private int score = 0;
     private int activeWorld = 1;
 
+    int time = 0;
+    int duration = 30;
+
     public Boot() {
         super();
         setPriority(1);
@@ -83,22 +86,37 @@ public class Boot extends Scene {
             }
         }
 
+        System.out.println(time);
+
+
+        // Player attack collisions
         for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
             if (player.slashHitboxR.intersects(enemyArrayListWorld1.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
-                enemyArrayListWorld1.get(j).setState(STATE.INVISIBLE);
-                enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(500000, 5000000);
-                score += 10;
+                time += i;
+                if (time<duration) {
+                    enemyArrayListWorld1.get(j).setState(STATE.INVISIBLE);
+                    enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(500000, 5000000);
+                    score += 10;
+                }
+            }
+            if (player.slashHitboxR.intersects(enemyArrayListWorld1.get(j).Enemyhitbox) && !gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                time = 0;
             }
         }
 
         for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
             if (player.slashHitboxR.intersects(enemyArrayListWorld2.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
-                enemyArrayListWorld2.get(j).setState(STATE.INVISIBLE);
-                enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(500000, 5000000);
-                score += 10;
+                //time += i;
+                if (time<duration) {
+                    enemyArrayListWorld2.get(j).setState(STATE.INVISIBLE);
+                    enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(500000, 5000000);
+                    score += 10;
+                }
+            }
+            if (!gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
+                time = 0;
             }
         }
-
 
         if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20 && activeWorld == 1){
             activeWorld = 2;
@@ -117,7 +135,10 @@ public class Boot extends Scene {
         }
 
         // Player collision Y
-        if (world.collidesWith(player.playerHitbox) && activeWorld == 1 || world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 || world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
+        if (world.collidesWith(player.playerHitbox) && activeWorld == 1 ||
+                world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 ||
+                world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
+
             player.playerHitbox.setY(player.playerHitbox.getY() - player.yPlayer );
             player.slashHitboxR.setY( player.slashHitboxR.getY() - player.yPlayer );
             player.slashHitboxL.setY( player.slashHitboxL.getY() - player.yPlayer );
@@ -130,7 +151,10 @@ public class Boot extends Scene {
             player.slashHitboxR.setY(player.slashHitboxR.getY() + 0.1f);
             player.slashHitboxL.setY(player.slashHitboxL.getY() + 0.1f);
 
-            if(world.collidesWith(player.playerHitbox) && activeWorld == 1 || world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 || world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
+            if(world.collidesWith(player.playerHitbox) && activeWorld == 1 ||
+                    world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 ||
+                    world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
+
                 player.yPlayer = player.jumpStrength;
             }
         }
@@ -140,7 +164,10 @@ public class Boot extends Scene {
         player.slashHitboxR.setX( player.slashHitboxR.getX() + player.xPlayer );
         player.slashHitboxL.setX( player.slashHitboxL.getX() + player.xPlayer );
 
-        if (world.collidesWith(player.playerHitbox) && activeWorld == 1 || world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 || world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
+        if (world.collidesWith(player.playerHitbox) && activeWorld == 1 ||
+                world2.collidesWithWorld2(player.playerHitbox) && activeWorld == 2 ||
+                world3.collidesWithWorld3(player.playerHitbox) && activeWorld == 3) {
+
             player.playerHitbox.setX( player.playerHitbox.getX() - player.xPlayer );
             player.slashHitboxR.setX( player.slashHitboxR.getX() - player.xPlayer );
             player.slashHitboxL.setX( player.slashHitboxL.getX() - player.xPlayer );
