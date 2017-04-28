@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Boot extends Scene {
 
-    ArrayList<Enemy> enemyArrayListWorld1;
-    ArrayList<Enemy> enemyArrayListWorld2;
+    private ArrayList<Enemy> enemyArrayListWorld1;
+    private ArrayList<Enemy> enemyArrayListWorld2;
 
     private World world;
     private World2 world2;
@@ -31,22 +31,36 @@ public class Boot extends Scene {
         world3.update(gameContainer, i);
         player.update(gameContainer, i);
 
-        for (int l = 0; l < enemyArrayListWorld1.size(); l++){
-            enemyArrayListWorld1.get(l).update(gameContainer, i);
-            enemyArrayListWorld2.get(l).update(gameContainer, i);
+        if (activeWorld == 1) {
+            for (int l = 0; l < enemyArrayListWorld1.size(); l++) {
+                enemyArrayListWorld1.get(l).update(gameContainer, i);
+            }
+        }
+
+        if (activeWorld == 2) {
+            for (int l = 0; l < enemyArrayListWorld2.size(); l++){
+                enemyArrayListWorld2.get(l).update(gameContainer, i);
+            }
         }
 
 
         for (int g = 0; g < enemyArrayListWorld1.size(); g++) {
             if (player.playerHitbox.intersects(enemyArrayListWorld1.get(g).Enemyhitbox) && activeWorld == 1) {
+                for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
+                    enemyArrayListWorld1.remove(j);
+                }
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
                 System.out.println("37");
+
             }
         }
 
         for (int g = 0; g < enemyArrayListWorld2.size(); g++) {
             if (player.playerHitbox.intersects(enemyArrayListWorld2.get(g).Enemyhitbox) && activeWorld == 2) {
+                for (int j = 0; j < enemyArrayListWorld2.size(); j++){
+                    enemyArrayListWorld2.remove(j);
+                }
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
                 System.out.println("45");
