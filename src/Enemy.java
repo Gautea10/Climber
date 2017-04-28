@@ -14,36 +14,36 @@ public class Enemy extends Scene  {
 
 
     private Animation sprite;
-    private static float speed = 2;
-    public float yEnemy = 10;
-    public float xEnemy = 5;
-    private static float gravity = 0.5f;
+    private float yEnemy;
+    private float xEnemy;
+    private static float gravity = 0.02f;
     public Shape Enemyhitbox;
     private World world;
 
 
 
+
     public Enemy(World world) {
         super();
-        setPriority(6);
+        setPriority(4);
         System.out.println("Enemy Ran");
         this.world = world;
-
+        this.yEnemy = (float) Math.random() * 500 + 20;
+        this.xEnemy = (float) Math.random() * 700 + 20;
     }
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
 
         graphics.setColor(Color.red);
-        graphics.draw(Enemyhitbox);
         graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
 
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
-        yEnemy += gravity;
 
+        yEnemy += gravity;
 
         // Collision in Y
         Enemyhitbox.setY(Enemyhitbox.getY() + yEnemy);
@@ -60,6 +60,13 @@ public class Enemy extends Scene  {
             Enemyhitbox.setX(Enemyhitbox.getX() - xEnemy);
             xEnemy = 0;
         }
+
+        if (world.collidesWith(Enemyhitbox)){
+
+        }
+
+
+
     }
 
     public void init(GameContainer gc) throws SlickException {
@@ -73,6 +80,7 @@ public class Enemy extends Scene  {
         int sprspeed = 63;
 
         int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
+
         sprite = new Animation(Ghost, duration, true);
 
         Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 80);
@@ -82,10 +90,5 @@ public class Enemy extends Scene  {
     public String toString() {
         return "Sence4";
     }
-
-
-
-
-
-
 }
+
