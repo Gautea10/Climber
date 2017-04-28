@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Shape;
  */
 public class Win extends Scene {
 
-    private Shape flagHitbox;
+    public Shape flagHitbox;
     private Animation flagAni, flag;
 
     public Win() {
@@ -68,3 +68,4 @@ public class Win extends Scene {
         this.flag = flag;
     }
 }
+

@@ -89,5 +89,3 @@ public class Enemy extends Scene  {
 
 
 }
-
-
