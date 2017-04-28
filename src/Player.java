@@ -42,18 +42,6 @@ public class Player extends Scene {
         sprite.draw(playerHitbox.getX(), playerHitbox.getY());
         slashSpriteR.draw(playerHitbox.getX() - 5, playerHitbox.getY());
         slashSpriteL.draw(playerHitbox.getX() - 40, playerHitbox.getY());
-
-        graphics.setColor(Color.red);
-        graphics.draw(playerHitbox);
-
-        graphics.setColor(Color.green);
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE) && LorR == 0) {
-            graphics.draw(slashHitboxR);
-        }
-
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_SPACE) && LorR == 1) {
-            graphics.draw(slashHitboxL);
-        }
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException
