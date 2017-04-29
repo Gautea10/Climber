@@ -11,10 +11,6 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 
-/**
- * Created by Gaute on 4/23/2017.
- */
-
 // Structure for the Player, creates the player then skips to World
 public class Player extends Scene {
 

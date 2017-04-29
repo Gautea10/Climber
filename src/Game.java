@@ -3,22 +3,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-
-/**
- * Created by Gaute on 4/23/2017.
- */
-
 // Implements the SceneManager to the project, and skips to MainMenu
 public class Game extends BasicGame{
 
     public static SceneManager manager;
 
     public Game() {
-        super("Game");
+        super("Climber");
     }
 
     @Override

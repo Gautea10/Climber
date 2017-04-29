@@ -4,6 +4,7 @@ import org.newdawn.slick.geom.Rectangle;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Boot extends Scene {
 
@@ -16,9 +17,11 @@ public class Boot extends Scene {
     private World3 world3;
     private Player player;
     private Win win;
+    private Finish finish;
     private int score = 0;
     private int activeWorld = 1;
     private GameTimer gameTimer;
+    int timeUsed;
 
     int time = 0;
     int duration = 30;
@@ -61,8 +64,6 @@ public class Boot extends Scene {
                 }
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
-                System.out.println("37");
-
             }
         }
 
@@ -73,7 +74,6 @@ public class Boot extends Scene {
                 }
                 Game.manager.clear();
                 Game.manager.addSence(new MainMenu());
-                System.out.println("45");
             }
         }
 
@@ -193,13 +193,22 @@ public class Boot extends Scene {
         }
 
         // Boss die
-        if (boss.lives == 0 && activeWorld == 3) {
-            int timeUsed = gameTimer.getSecondsSinceCreation();
-            boss.Enemyhitbox.setLocation(50000, 50000);
-            String name = JOptionPane.showInputDialog(null, "You have completed the game\n type in your name");
+        if (activeWorld == 4) {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String name = JOptionPane.showInputDialog(null, "You have completed the game!\nYour score is: " + (score - timeUsed) + "\nType in your name");
             MainMenu.highscore.addHighscore(name, score - timeUsed);
             Game.manager.clear();
             Game.manager.addSence(new MainMenu());
+        }
+
+        if (boss.lives == 0 && activeWorld == 3) {
+            activeWorld = 4;
+            timeUsed = gameTimer.getSecondsSinceCreation();
+            boss.Enemyhitbox.setLocation(50000, 50000);
         }
 
         // Player collision World Y
@@ -262,8 +271,13 @@ public class Boot extends Scene {
             world3.render(gameContainer, graphics);
             boss.render(gameContainer, graphics);
         }
+        if (activeWorld == 4) {
+            finish.render(gameContainer,graphics);
+        }
 
-        player.render(gameContainer, graphics);
+        if (activeWorld != 4) {
+            player.render(gameContainer, graphics);
+        }
 
         if (score >= 20 && activeWorld == 1) {
             win.render(gameContainer, graphics);
@@ -295,6 +309,9 @@ public class Boot extends Scene {
 
         win = new Win();
         win.init(gameContainer);
+
+        finish = new Finish();
+        finish.init(gameContainer);
 
         Rectangle r1 = new Rectangle(20, 50, 200,80);
         Rectangle r2 = new Rectangle(770,50,200, 80);
@@ -363,6 +380,7 @@ public class Boot extends Scene {
         boss = new EnemyBoss(world3);
         boss.init(gameContainer);
         boss.Enemyhitbox.setLocation(512, 100);
+
         gameTimer = new GameTimer();
     }
 

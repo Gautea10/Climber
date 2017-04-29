@@ -1,20 +1,9 @@
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.StateBasedGame;
 
-import java.io.File;
-
-/**
- * Created by Gaute on 4/19/2017.
- */
 public class Main {
 
-    private static String gameName = "Climber";
     public static int gameWidth = 1024;
     public static int gameHeight = 768;
-    public static int climberID = 0;
-    public static int mainMenuID = 0;
 
     public Main(String gameName){
         super();
