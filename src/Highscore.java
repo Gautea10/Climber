@@ -21,6 +21,18 @@ public final class Highscore {
         return hsDictSorted;
     }
 
+    public String returnAsString() {
+        Set set = sortHighscore().entrySet();
+        Iterator i = set.iterator();
+        String s = "";
+
+        for (int j = 0; j < set.size(); j++) {
+            Map.Entry me = (Map.Entry)i.next();
+            s += me.getKey() + ": " + me.getValue() + "\n";
+        }
+        return s;
+    }
+
     public Map getHighscore() {
         return hsDict;
     }

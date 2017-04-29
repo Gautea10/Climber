@@ -1,23 +1,18 @@
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Rectangle;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 
-// The structure for the game's main menu, skips to Player after space/startButton is clicked
 public class MainMenu extends Scene {
 
     Image startBtn;
     int startBtnPosX = 384;
-    int startBtnPosY = 200;
+    int startBtnPosY = 250;
     int startBtnWidth = 300;
     int startBtnHeight = 150;
 
     public static Highscore highscore;
+
+    Image background;
 
     public MainMenu() {
         super();
@@ -27,19 +22,14 @@ public class MainMenu extends Scene {
     protected void CustomRender(GameContainer gameContainer, org.newdawn.slick.Graphics graphics) throws SlickException
     {
         graphics.drawString("Main menu", 490, 100);
+        graphics.drawImage(background,0,0);
+
         startBtn.draw(startBtnPosX, startBtnPosY, startBtnWidth, startBtnHeight);
 
-        graphics.drawString("Highscore", 100, 100);
+        graphics.drawString("Highscore", 80, 250);
 
-        Set set = highscore.sortHighscore().entrySet();
-        Iterator i = set.iterator();
-        String s = "";
 
-        for (int j = 0; j < set.size(); j++) {
-            Map.Entry me = (Map.Entry)i.next();
-            s += me.getKey() + ": " + me.getValue() + "\n";
-        }
-        graphics.drawString(s, 100, 120);
+        graphics.drawString(highscore.returnAsString(), 80, 280);
 
         graphics.drawString("Move: W,A,S,D", 470, 500);
         graphics.drawString("Attack: Space", 470, 520);
@@ -49,7 +39,6 @@ public class MainMenu extends Scene {
 
         int posX = gameContainer.getInput().getMouseX();
         int posY = gameContainer.getInput().getMouseY();
-        //System.out.println(posX + ", " + posY);
 
         if ((posX > startBtnPosX && posX < startBtnPosX + startBtnWidth) && (posY > startBtnPosY && posY < startBtnPosY + startBtnHeight)) {
             if (gameContainer.getInput().isMousePressed(0)) {
@@ -61,6 +50,7 @@ public class MainMenu extends Scene {
 
     public void init (GameContainer gameContainer) throws SlickException {
         startBtn = new Image("sprites/startBtn.png");
+        background = new Image("sprites/menuBg.png");
 
         highscore = Highscore.getInstance();
     }

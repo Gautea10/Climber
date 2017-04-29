@@ -1,6 +1,5 @@
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
-import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class Boot extends Scene {
     private int score = 0;
     private int activeWorld = 1;
     private GameTimer gameTimer;
-    
+
     int time = 0;
     int duration = 30;
 
