@@ -11,7 +11,7 @@ import org.newdawn.slick.opengl.Texture;
 public class World extends Scene {
 
     private Shape levelBase, baseR, baseL;
-    private Shape platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8;
+    private Shape platform, platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8;
 
     Image background;
     Image groundTexture;
@@ -36,10 +36,10 @@ public class World extends Scene {
         graphics.fill(baseL);
 
         // Platforms
+        graphics.draw(platform);
+        graphics.texture(platform,groundTexture,0,10);
         graphics.draw(platform1);
         graphics.texture(platform1,groundTexture,0,10);
-
-        //graphics.fill(platform1);
         graphics.draw(platform2);
         graphics.texture(platform2,groundTexture,0,10);
         graphics.draw(platform3);
@@ -67,9 +67,10 @@ public class World extends Scene {
         baseL = new Rectangle(1024,-500,100,2560);
 
         // Platforms
-        platform1 = new Rectangle(0, 580, 100, 50);
-        platform2 = new Rectangle(1024 - 100, 580, 100, 50);
-        platform3 = new Rectangle(1024/2 - 250, 500, 500, 50);
+        platform = new Rectangle(0, 580, 100, 50);
+        platform1 = new Rectangle(1024 - 100, 580, 100, 50);
+        platform2 = new Rectangle(1024/2 - 350, 500, 280, 50);
+        platform3 = new Rectangle(1024/2 + 50, 500, 280, 50);
 
         platform4 = new Rectangle((1024/2) - 224, 350, 120, 50);
         platform5 = new Rectangle(600, 350, 120, 50);
@@ -87,6 +88,7 @@ public class World extends Scene {
         return levelBase.intersects(s) ||
                 baseR.intersects(s) ||
                 baseL.intersects(s) ||
+                platform.intersects(s) ||
                 platform1.intersects(s) ||
                 platform2.intersects(s) ||
                 platform3.intersects(s) ||
