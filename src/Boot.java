@@ -50,8 +50,6 @@ public class Boot extends Scene {
 
         if (activeWorld == 3) {
             boss.Enemyhitbox = boss.followPlayer(player.playerHitbox, boss.Enemyhitbox);
-            System.out.println("player: " + player.playerHitbox.getX() + ", " + player.playerHitbox.getY());
-            System.out.println("boss: " + boss.Enemyhitbox.getX() + ", " + boss.Enemyhitbox.getY());
             boss.update(gameContainer, i);
         }
 
