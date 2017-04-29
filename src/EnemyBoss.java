@@ -1,6 +1,7 @@
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import sun.security.provider.SHA;
 
 /**
  * Created by HEH on 28.04.2017.
@@ -13,7 +14,7 @@ public class EnemyBoss extends Scene {
     private static float gravity = 0.02f;
     public Shape Enemyhitbox;
     private World3 world3;
-    public int lives = 5;
+    public int lives = 10;
 
     public EnemyBoss(World3 world3) {
         super();
@@ -50,6 +51,7 @@ public class EnemyBoss extends Scene {
             Enemyhitbox.setX(Enemyhitbox.getX() - xEnemy);
             xEnemy = 0;
         }
+
     }
 
     public void init(GameContainer gc) throws SlickException {
@@ -74,6 +76,19 @@ public class EnemyBoss extends Scene {
         sprite = new Animation(Boss, duration, true);
 
         Enemyhitbox = new Rectangle(xEnemy, yEnemy, 119 ,95);
+    }
+
+    public Shape followPlayer(Shape targetHitbox, Shape selfHitbox) {
+        int step = 1;
+
+        float a = targetHitbox.getX() - selfHitbox.getX();
+        float b = targetHitbox.getY() - selfHitbox.getY();
+        double h = (int) Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+
+        selfHitbox.setX(selfHitbox.getX() + (float)(a / h * step));
+        selfHitbox.setY(selfHitbox.getY() + (float)(b / h * step));
+
+        return selfHitbox;
     }
 
 
