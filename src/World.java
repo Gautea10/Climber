@@ -69,8 +69,8 @@ public class World extends Scene {
         // Platforms
         platform = new Rectangle(0, 580, 100, 50);
         platform1 = new Rectangle(1024 - 100, 580, 100, 50);
-        platform2 = new Rectangle(1024/2 - 350, 500, 280, 50);
-        platform3 = new Rectangle(1024/2 + 50, 500, 280, 50);
+        platform2 = new Rectangle(1024/2 - 320, 500, 250, 50);
+        platform3 = new Rectangle(1024/2 + 50, 500, 250, 50);
 
         platform4 = new Rectangle((1024/2) - 224, 350, 120, 50);
         platform5 = new Rectangle(600, 350, 120, 50);
