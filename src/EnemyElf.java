@@ -67,7 +67,7 @@ public class EnemyElf extends Scene  {
 
             sprite = new Animation(elf, duration, true);
 
-            Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 80);
+            Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 75);
             }
 
 

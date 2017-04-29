@@ -2,6 +2,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.w3c.dom.css.Rect;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -191,8 +192,12 @@ public class Boot extends Scene {
         }
 
         // Boss die
-        if (boss == null && activeWorld == 3) {
-            System.out.println("You win!");
+        if (boss.lives == 0 && activeWorld == 3) {
+            boss.Enemyhitbox.setLocation(50000, 50000);
+            String name = JOptionPane.showInputDialog(null, "You have completed the game\n type in your name");
+            MainMenu.highscore.addHighscore(name, score);
+            Game.manager.clear();
+            Game.manager.addSence(new MainMenu());
         }
 
         // Player collision World Y
@@ -290,14 +295,14 @@ public class Boot extends Scene {
         win = new Win();
         win.init(gameContainer);
 
-        Rectangle r1 = new Rectangle(20, 50, 240,160);
-        Rectangle r2 = new Rectangle(770,50,240, 160);
-        Rectangle r3 = new Rectangle(270,10, 480, 80);
-        Rectangle r4 = new Rectangle(280,170, 180,170);
-        Rectangle r5 = new Rectangle(570, 170, 180, 170);
-        Rectangle r6 = new Rectangle(20, 280, 220, 270);
-        Rectangle r7 = new Rectangle(770,300,220,270);
-        Rectangle r8 = new Rectangle(150, 580,700, 80);
+        Rectangle r1 = new Rectangle(20, 50, 200,80);
+        Rectangle r2 = new Rectangle(770,50,200, 80);
+        Rectangle r3 = new Rectangle(270,0, 440, 20);
+        Rectangle r4 = new Rectangle(280,170, 140,90);
+        Rectangle r5 = new Rectangle(570, 170, 140, 90);
+        Rectangle r6 = new Rectangle(20, 280, 180, 190);
+        Rectangle r7 = new Rectangle(770,300,180,190);
+        Rectangle r8 = new Rectangle(150, 580,660, 20);
 
         ArrayList<Rectangle> rectanglesWorld1 = new ArrayList<>();
 
@@ -321,15 +326,15 @@ public class Boot extends Scene {
             enemyArrayListWorld1.get(i).Enemyhitbox.setLocation(randomizer.nextInt((int) random.getWidth()) + random.getX(), randomizer.nextInt((int) random.getHeight()) + random.getY());
         }
 
-        Rectangle r9 = new Rectangle(20, 40, 240,160);
-        Rectangle r10 = new Rectangle(770,40,240, 160);
-        Rectangle r11 = new Rectangle(270,10, 480, 80);
-        Rectangle r12 = new Rectangle(280,170, 180,170);
-        Rectangle r13 = new Rectangle(570, 170, 180, 170);
-        Rectangle r14 = new Rectangle(20, 270, 140, 220);
-        Rectangle r15 = new Rectangle(850,270,140,220);
-        Rectangle r16 = new Rectangle(100, 590,360, 80);
-        Rectangle r17 = new Rectangle(570,590,360,80);
+        Rectangle r9 = new Rectangle(20, 40, 200,80);
+        Rectangle r10 = new Rectangle(770,40,200, 80);
+        Rectangle r11 = new Rectangle(270,10, 440, 20);
+        Rectangle r12 = new Rectangle(280,170, 140,90);
+        Rectangle r13 = new Rectangle(570, 170, 140, 90);
+        Rectangle r14 = new Rectangle(20, 270, 100, 140);
+        Rectangle r15 = new Rectangle(850,270,100,140);
+        Rectangle r16 = new Rectangle(100, 590,320, 20);
+        Rectangle r17 = new Rectangle(570,590,320,20);
 
         ArrayList<Rectangle> rectanglesWorld2 = new ArrayList<>();
 
@@ -354,7 +359,7 @@ public class Boot extends Scene {
 
         boss = new EnemyBoss(world3);
         boss.init(gameContainer);
-        boss.Enemyhitbox.setLocation(512, 30);
+        boss.Enemyhitbox.setLocation(512, 100);
     }
 
     public String toString()

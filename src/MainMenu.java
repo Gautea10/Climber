@@ -55,10 +55,6 @@ public class MainMenu extends Scene {
         startBtn = new Image("sprites/startBtn.png");
 
         highscore = Highscore.getInstance();
-
-        highscore.addHighscore("name1", 12);
-        highscore.addHighscore("name2", 122);
-        highscore.addHighscore("name3", 4);
     }
 
     public String toString()
