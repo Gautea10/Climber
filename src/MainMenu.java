@@ -1,6 +1,7 @@
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.geom.Rectangle;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -12,7 +13,9 @@ public class MainMenu extends Scene {
 
     Image startBtn;
     int startBtnPosX = 384;
-    int startBtnPosY = 300;
+    int startBtnPosY = 200;
+    int startBtnWidth = 300;
+    int startBtnHeight = 150;
 
     public static Highscore highscore;
 
@@ -23,8 +26,8 @@ public class MainMenu extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, org.newdawn.slick.Graphics graphics) throws SlickException
     {
-        graphics.drawString("Main menu", 500, 100);
-        startBtn.draw(startBtnPosX,startBtnPosY,300,150);
+        graphics.drawString("Main menu", 490, 100);
+        startBtn.draw(startBtnPosX, startBtnPosY, startBtnWidth, startBtnHeight);
 
         graphics.drawString("Highscore", 100, 100);
 
@@ -37,16 +40,21 @@ public class MainMenu extends Scene {
             s += me.getKey() + ": " + me.getValue() + "\n";
         }
         graphics.drawString(s, 100, 120);
+
+        graphics.drawString("Move: W,A,S,D", 470, 500);
+        graphics.drawString("Attack: Space", 470, 520);
     }
 
     protected void CustomUpdate (GameContainer gameContainer, int i) throws SlickException {
 
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
+        int posX = gameContainer.getInput().getMouseX();
+        int posY = gameContainer.getInput().getMouseY();
+        //System.out.println(posX + ", " + posY);
 
-        if ((posX > startBtnPosX && posX < 684) && (posY > startBtnPosY && posY < 450)) {
-            if (Mouse.isButtonDown(0)) {
+        if ((posX > startBtnPosX && posX < startBtnPosX + startBtnWidth) && (posY > startBtnPosY && posY < startBtnPosY + startBtnHeight)) {
+            if (gameContainer.getInput().isMousePressed(0)) {
                 Game.manager.addSence(new Boot());
+                System.out.println("start");
             }
         }
     }
