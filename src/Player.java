@@ -15,7 +15,6 @@ public class Player extends Scene {
     public static float jumpStrength = -13;
     private static float speed = 10;
 
-    //private Animation player;
     Shape playerHitbox, slashHitboxR, slashHitboxL;
 
     private int LorR = 0;
@@ -39,9 +38,6 @@ public class Player extends Scene {
         slashSpriteR.draw(playerHitbox.getX(), playerHitbox.getY());
         slashSpriteL.draw(playerHitbox.getX() - 40, playerHitbox.getY());
 
-        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && LorR == 0) {
-            slashSpriteR.setCurrentFrame(1);
-        }
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException

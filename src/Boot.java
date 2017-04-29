@@ -11,6 +11,7 @@ public class Boot extends Scene {
     private ArrayList<Enemy> enemyArrayListWorld1;
     private ArrayList<EnemyElf> enemyArrayListWorld2;
     private EnemyBoss boss;
+    private Animation bossHitSprite;
 
     private World world;
     private World2 world2;
@@ -115,6 +116,7 @@ public class Boot extends Scene {
             time += i;
             if (time<duration) {
                 if (boss.lives > 0) {
+                    bossHitSprite.setCurrentFrame(1);
                     boss.lives -= 1;
                 } else {
                     boss.setState(STATE.INVISIBLE);
@@ -159,6 +161,7 @@ public class Boot extends Scene {
             time += i;
             if (time<duration) {
                 if (boss.lives > 0) {
+                    bossHitSprite.setCurrentFrame(1);
                     boss.lives -= 1;
                 } else {
                     boss.setState(STATE.INVISIBLE);
@@ -284,6 +287,9 @@ public class Boot extends Scene {
         }
         graphics.drawString("Score: " + score,10, 50);
         graphics.drawString("Time: " + gameTimer.getSecondsSinceCreation(), 10, 70);
+
+        bossHitSprite.draw(boss.Enemyhitbox.getX(), boss.Enemyhitbox.getY());
+        bossHitSprite.setCurrentFrame(0);
     }
 
     @Override
@@ -375,6 +381,13 @@ public class Boot extends Scene {
         boss = new EnemyBoss(world3);
         boss.init(gameContainer);
         boss.Enemyhitbox.setLocation(512, 100);
+
+        Image [] bossHit = {
+                new Image("sprites/bossNotHit.png"),
+                new Image("sprites/bossHit.png")
+        };
+        int duration = 150;
+        bossHitSprite = new Animation(bossHit, duration, false);
 
         gameTimer = new GameTimer();
     }
