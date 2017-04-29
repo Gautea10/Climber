@@ -32,8 +32,4 @@ public final class Highscore {
         }
         return s;
     }
-
-    public Map getHighscore() {
-        return hsDict;
-    }
 }

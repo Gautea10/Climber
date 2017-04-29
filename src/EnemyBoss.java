@@ -3,9 +3,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import sun.security.provider.SHA;
 
-/**
- * Created by HEH on 28.04.2017.
- */
+
 public class EnemyBoss extends Scene {
 
     private Animation sprite, right, left;

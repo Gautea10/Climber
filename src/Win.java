@@ -2,9 +2,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-/**
- * Created by Gaute on 4/27/2017.
- */
+
 public class Win extends Scene {
 
     public Shape flagHitbox;
