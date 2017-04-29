@@ -49,6 +49,7 @@ public class Boot extends Scene {
         }
 
         if (activeWorld == 3) {
+            boss.Enemyhitbox = boss.followPlayer(player.playerHitbox, boss.Enemyhitbox);
             boss.update(gameContainer, i);
         }
 
