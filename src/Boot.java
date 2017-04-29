@@ -19,7 +19,8 @@ public class Boot extends Scene {
     private Win win;
     private int score = 0;
     private int activeWorld = 1;
-
+    private GameTimer gameTimer;
+    
     int time = 0;
     int duration = 30;
 
@@ -194,9 +195,10 @@ public class Boot extends Scene {
 
         // Boss die
         if (boss.lives == 0 && activeWorld == 3) {
+            int timeUsed = gameTimer.getSecondsSinceCreation();
             boss.Enemyhitbox.setLocation(50000, 50000);
             String name = JOptionPane.showInputDialog(null, "You have completed the game\n type in your name");
-            MainMenu.highscore.addHighscore(name, score);
+            MainMenu.highscore.addHighscore(name, score - timeUsed);
             Game.manager.clear();
             Game.manager.addSence(new MainMenu());
         }
@@ -240,8 +242,6 @@ public class Boot extends Scene {
             player.slashHitboxL.setX( player.slashHitboxL.getX() - player.xPlayer );
             player.xPlayer = 0;
         }
-
-        //System.out.println(boss.lives);
     }
 
     @Override
@@ -275,6 +275,7 @@ public class Boot extends Scene {
             win.render(gameContainer, graphics);
         }
         graphics.drawString("Score: " + score,10, 50);
+        graphics.drawString("Time: " + gameTimer.getSecondsSinceCreation(), 10, 70);
     }
 
     @Override
@@ -303,7 +304,8 @@ public class Boot extends Scene {
         Rectangle r5 = new Rectangle(570, 170, 140, 90);
         Rectangle r6 = new Rectangle(20, 280, 180, 190);
         Rectangle r7 = new Rectangle(770,300,180,190);
-        Rectangle r8 = new Rectangle(150, 580,660, 20);
+        Rectangle r8 = new Rectangle(120, 580,300, 20);
+        Rectangle r9 = new Rectangle(570, 580, 300, 20);
 
         ArrayList<Rectangle> rectanglesWorld1 = new ArrayList<>();
 
@@ -315,6 +317,7 @@ public class Boot extends Scene {
         rectanglesWorld1.add(r6);
         rectanglesWorld1.add(r7);
         rectanglesWorld1.add(r8);
+        rectanglesWorld1.add(r9);
 
         Random randomizer = new Random();
 
@@ -327,19 +330,18 @@ public class Boot extends Scene {
             enemyArrayListWorld1.get(i).Enemyhitbox.setLocation(randomizer.nextInt((int) random.getWidth()) + random.getX(), randomizer.nextInt((int) random.getHeight()) + random.getY());
         }
 
-        Rectangle r9 = new Rectangle(20, 40, 200,80);
-        Rectangle r10 = new Rectangle(770,40,200, 80);
-        Rectangle r11 = new Rectangle(270,10, 440, 20);
-        Rectangle r12 = new Rectangle(280,170, 140,90);
-        Rectangle r13 = new Rectangle(570, 170, 140, 90);
-        Rectangle r14 = new Rectangle(20, 270, 100, 140);
-        Rectangle r15 = new Rectangle(850,270,100,140);
-        Rectangle r16 = new Rectangle(100, 590,320, 20);
-        Rectangle r17 = new Rectangle(570,590,320,20);
+        Rectangle r10 = new Rectangle(20, 40, 200,80);
+        Rectangle r11 = new Rectangle(770,40,200, 80);
+        Rectangle r12 = new Rectangle(270,10, 440, 20);
+        Rectangle r13 = new Rectangle(280,170, 140,90);
+        Rectangle r14 = new Rectangle(570, 170, 140, 90);
+        Rectangle r15 = new Rectangle(20, 270, 100, 140);
+        Rectangle r16 = new Rectangle(850,270,100,140);
+        Rectangle r17 = new Rectangle(100, 590,320, 20);
+        Rectangle r18 = new Rectangle(570,590,320,20);
 
         ArrayList<Rectangle> rectanglesWorld2 = new ArrayList<>();
 
-        rectanglesWorld2.add(r9);
         rectanglesWorld2.add(r10);
         rectanglesWorld2.add(r11);
         rectanglesWorld2.add(r12);
@@ -348,6 +350,7 @@ public class Boot extends Scene {
         rectanglesWorld2.add(r15);
         rectanglesWorld2.add(r16);
         rectanglesWorld2.add(r17);
+        rectanglesWorld2.add(r18);
 
         enemyArrayListWorld2 = new ArrayList<>();
 
@@ -361,6 +364,7 @@ public class Boot extends Scene {
         boss = new EnemyBoss(world3);
         boss.init(gameContainer);
         boss.Enemyhitbox.setLocation(512, 100);
+        gameTimer = new GameTimer();
     }
 
     public String toString()
