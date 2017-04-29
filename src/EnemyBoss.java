@@ -28,7 +28,6 @@ public class EnemyBoss extends Scene {
         graphics.setColor(Color.red);
         graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
-
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -56,7 +55,6 @@ public class EnemyBoss extends Scene {
         } else if (Enemyhitbox.getX() > (1024/2) - (119/2)) {
             sprite = right;
         }
-
     }
 
     public void init(GameContainer gc) throws SlickException {
