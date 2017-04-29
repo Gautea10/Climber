@@ -8,7 +8,7 @@ import sun.security.provider.SHA;
  */
 public class EnemyBoss extends Scene {
 
-    private Animation sprite;
+    private Animation sprite, right, left;
     private float yEnemy = 0;
     private float xEnemy = 0;
     private static float gravity = 0.02f;
@@ -25,7 +25,6 @@ public class EnemyBoss extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
-
         graphics.setColor(Color.red);
         graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
@@ -34,7 +33,7 @@ public class EnemyBoss extends Scene {
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
 
-        yEnemy += gravity;
+        //yEnemy += gravity;
 
         // Collision in Y
         Enemyhitbox.setY(Enemyhitbox.getY() + yEnemy);
@@ -52,28 +51,37 @@ public class EnemyBoss extends Scene {
             xEnemy = 0;
         }
 
+        if(Enemyhitbox.getX() <= (1024/2) - (119/2)) {
+            sprite = left;
+        } else if (Enemyhitbox.getX() > (1024/2) - (119/2)) {
+            sprite = right;
+        }
+
     }
 
     public void init(GameContainer gc) throws SlickException {
-        Image[] Boss = {
+        Image[] BossLeft = {
                 new Image("sprites/bossLeft1.png"),
                 new Image("sprites/bossLeft2.png"),
                 new Image("sprites/bossLeft3.png"),
                 new Image("sprites/bossLeft4.png")
         };
 
-        // Image[] BossLeft = {
-        //       new Image("sprites/bossRight1.png"),
-        //        new Image("sprites/bossRight2.png"),
-        //        new Image("sprites/bossRight3.png"),
-        //        new Image("sprites/bossRight4.png")
-        // };
+        Image[] Boss = {
+                new Image("sprites/bossRight1.png"),
+                new Image("sprites/bossRight2.png"),
+                new Image("sprites/bossRight3.png"),
+                new Image("sprites/bossRight4.png")
+        };
+
 
         int sprspeed = 150;
 
         int[] duration = {sprspeed, sprspeed, sprspeed, sprspeed};
 
-        sprite = new Animation(Boss, duration, true);
+        right = new Animation(Boss, duration, true);
+        left = new Animation(BossLeft, duration, true);
+        sprite =  right;
 
         Enemyhitbox = new Rectangle(xEnemy, yEnemy, 119 ,95);
     }
