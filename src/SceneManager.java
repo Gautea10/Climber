@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,9 +6,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-/**
- * Created by Gaute on 4/23/2017.
- */
 
 // Keeps control over what java files is playing
 public class SceneManager {

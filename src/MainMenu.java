@@ -5,14 +5,14 @@ import org.newdawn.slick.Image;
 public class MainMenu extends Scene {
 
     Image startBtn;
-    int startBtnPosX = 384;
-    int startBtnPosY = 250;
-    int startBtnWidth = 300;
-    int startBtnHeight = 150;
+    private int startBtnPosX = 384;
+    private int startBtnPosY = 250;
+    private int startBtnWidth = 300;
+    private int startBtnHeight = 150;
 
     public static Highscore highscore;
 
-    Image background;
+    private Image background;
 
     public MainMenu() {
         super();
@@ -27,8 +27,6 @@ public class MainMenu extends Scene {
         startBtn.draw(startBtnPosX, startBtnPosY, startBtnWidth, startBtnHeight);
 
         graphics.drawString("Highscore", 80, 250);
-
-
         graphics.drawString(highscore.returnAsString(), 80, 280);
 
         graphics.drawString("Move: W,A,S,D", 470, 500);
@@ -43,7 +41,6 @@ public class MainMenu extends Scene {
         if ((posX > startBtnPosX && posX < startBtnPosX + startBtnWidth) && (posY > startBtnPosY && posY < startBtnPosY + startBtnHeight)) {
             if (gameContainer.getInput().isMousePressed(0)) {
                 Game.manager.addSence(new Boot());
-                System.out.println("start");
             }
         }
     }

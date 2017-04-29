@@ -21,7 +21,7 @@ public class Boot extends Scene {
     private int score = 0;
     private int activeWorld = 1;
     private GameTimer gameTimer;
-    int timeUsed;
+    int gameTimeUsed;
 
     int time = 0;
     int duration = 30;
@@ -86,7 +86,6 @@ public class Boot extends Scene {
         for (int h = 0; h < enemyArrayListWorld1.size(); h++) {
             if (player.slashHitboxL.intersects(enemyArrayListWorld1.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
                 time += i;
-                System.out.println("EnemyL: " + time);
                 if (time<duration) {
                     enemyArrayListWorld1.get(h).setState(STATE.INVISIBLE);
                     enemyArrayListWorld1.get(h).Enemyhitbox.setLocation(500000, 500000);
@@ -101,7 +100,6 @@ public class Boot extends Scene {
         for (int h = 0; h < enemyArrayListWorld2.size(); h++) {
             if (player.slashHitboxL.intersects(enemyArrayListWorld2.get(h).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
                 time += i;
-                System.out.println("EnemyL: " + time);
                 if (time<duration) {
                     enemyArrayListWorld2.get(h).setState(STATE.INVISIBLE);
                     enemyArrayListWorld2.get(h).Enemyhitbox.setLocation(500000, 500000);
@@ -115,7 +113,6 @@ public class Boot extends Scene {
 
         if (player.slashHitboxL.intersects(boss.Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 3) {
             time += i;
-            System.out.println("Boss: " + time);
             if (time<duration) {
                 if (boss.lives > 0) {
                     boss.lives -= 1;
@@ -133,7 +130,6 @@ public class Boot extends Scene {
         for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
             if (player.slashHitboxR.intersects(enemyArrayListWorld1.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 1) {
                 time += i;
-                System.out.println("EnemyR: " + time);
                 if (time<duration) {
                     enemyArrayListWorld1.get(j).setState(STATE.INVISIBLE);
                     enemyArrayListWorld1.get(j).Enemyhitbox.setLocation(500000, 5000000);
@@ -148,7 +144,6 @@ public class Boot extends Scene {
         for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
             if (player.slashHitboxR.intersects(enemyArrayListWorld2.get(j).Enemyhitbox) && gameContainer.getInput().isKeyDown(Input.KEY_SPACE) && activeWorld == 2) {
                 time += i;
-                System.out.println("EnemyR: " + time);
                 if (time<duration) {
                     enemyArrayListWorld2.get(j).setState(STATE.INVISIBLE);
                     enemyArrayListWorld2.get(j).Enemyhitbox.setLocation(500000, 5000000);
@@ -199,15 +194,15 @@ public class Boot extends Scene {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            String name = JOptionPane.showInputDialog(null, "You have completed the game!\nYour score is: " + (score - timeUsed) + "\nType in your name");
-            MainMenu.highscore.addHighscore(name, score - timeUsed);
+            String name = JOptionPane.showInputDialog(null, "You have completed the game!\nYour score is: " + (score - gameTimeUsed) + "\nType in your name");
+            MainMenu.highscore.addHighscore(name, score - gameTimeUsed);
             Game.manager.clear();
             Game.manager.addSence(new MainMenu());
         }
 
         if (boss.lives == 0 && activeWorld == 3) {
             activeWorld = 4;
-            timeUsed = gameTimer.getSecondsSinceCreation();
+            gameTimeUsed = gameTimer.getSecondsSinceCreation();
             boss.Enemyhitbox.setLocation(50000, 50000);
         }
 

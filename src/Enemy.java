@@ -9,9 +9,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 
-
 public class Enemy extends Scene  {
-
 
     private Animation sprite;
     private float yEnemy = 0;
@@ -70,7 +68,6 @@ public class Enemy extends Scene  {
 
         Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 80);
     }
-
 
     public String toString() {
         return "Sence4";

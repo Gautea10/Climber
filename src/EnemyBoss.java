@@ -17,7 +17,7 @@ public class EnemyBoss extends Scene {
     public EnemyBoss(World3 world3) {
         super();
         setPriority(5);
-        System.out.println("EnemyElf Ran");
+        System.out.println("EnemyBoss Ran");
         this.world3 = world3;
     }
 
@@ -29,24 +29,6 @@ public class EnemyBoss extends Scene {
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
-
-        //yEnemy += gravity;
-
-        // Collision in Y
-        Enemyhitbox.setY(Enemyhitbox.getY() + yEnemy);
-
-        if (world3.collidesWithWorld3(Enemyhitbox)) {
-            Enemyhitbox.setY(Enemyhitbox.getY() - yEnemy);
-            yEnemy = 0;
-        }
-
-        // Collision X
-        Enemyhitbox.setX(Enemyhitbox.getX() + xEnemy);
-
-        if (world3.collidesWithWorld3(Enemyhitbox)) {
-            Enemyhitbox.setX(Enemyhitbox.getX() - xEnemy);
-            xEnemy = 0;
-        }
 
         if(Enemyhitbox.getX() <= (1024/2) - (119/2)) {
             sprite = left;
@@ -94,7 +76,6 @@ public class EnemyBoss extends Scene {
 
         return selfHitbox;
     }
-
 
     public String toString() {
         return "Sence5";

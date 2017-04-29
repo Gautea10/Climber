@@ -2,9 +2,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-/**
- * Created by Gaute on 4/27/2017.
- */
+
 public class World2 extends Scene {
 
     private Shape levelBase, baseR, baseL;
@@ -12,8 +10,8 @@ public class World2 extends Scene {
             platform12, platform13, platform14,
             platform15, platform16, platform17;
 
-    Image background2;
-    Image groundTexture2;
+    private Image background2;
+    private Image groundTexture2;
 
     public World2() {
         super();

@@ -1,11 +1,7 @@
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.opengl.Texture;
 
-/**
- * Created by Gaute on 4/23/2017.
- */
 
 // Structure for the first world/map
 public class World extends Scene {
@@ -13,8 +9,8 @@ public class World extends Scene {
     private Shape levelBase, baseR, baseL;
     private Shape platform, platform1, platform2, platform3, platform4, platform5, platform6, platform7, platform8;
 
-    Image background;
-    Image groundTexture;
+    private Image background;
+    private Image groundTexture;
 
     public World() {
         super();

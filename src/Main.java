@@ -5,7 +5,7 @@ public class Main {
     public static int gameWidth = 1024;
     public static int gameHeight = 768;
 
-    public Main(String gameName){
+    public Main(){
         super();
         new Game();
     }
@@ -16,6 +16,7 @@ public class Main {
             AppGameContainer app = new AppGameContainer( new Game() );
             app.setDisplayMode(gameWidth, gameHeight, false);
             app.setTargetFrameRate(60);
+            app.setShowFPS(false);
             app.start();
 
         } catch (SlickException e) {

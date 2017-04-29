@@ -1,9 +1,6 @@
-import org.lwjgl.Sys;
 import org.newdawn.slick.*;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -19,11 +16,11 @@ public class Player extends Scene {
     private static float speed = 10;
 
     //private Animation player;
-    public Shape playerHitbox, slashHitboxR, slashHitboxL;
+    Shape playerHitbox, slashHitboxR, slashHitboxL;
 
-    int LorR = 0;
-    int time = 0;
-    int duration = 100;
+    private int LorR = 0;
+    private int time = 0;
+    private int duration = 100;
 
     private Animation sprite, idle, idle2, right, left, slashR, slashSpriteR, slashL, slashSpriteL;
     public float xPlayer = 1024 / 2;
@@ -69,14 +66,12 @@ public class Player extends Scene {
             sprite = left;
             LorR = 1;
         }
-        else if(LorR == 0)
-        {
+        else if(LorR == 0) {
             xPlayer = 0;
             sprite = idle;
         }
 
-        else if (LorR == 1)
-        {
+        else if (LorR == 1) {
             xPlayer = 0;
             sprite = idle2;
         }
@@ -175,7 +170,6 @@ public class Player extends Scene {
         sprite = idle;
 
         playerHitbox  = new Rectangle(xPlayer-20,yPlayer,45,80);
-        //System.out.println(yPlayer);
 
         // Attack sprite
         slashR = new Animation(pickAxeSlashR, duration3, false);

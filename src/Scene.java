@@ -3,18 +3,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import java.awt.*;
 
-
-public class Scene implements Comparable<Scene>
-{
-
+public class Scene implements Comparable<Scene> {
 	public enum STATE { ON , FREEZE , FREEZE_NEXT , INVISIBLE };
 	private STATE state;
 	private int prio = 0;
 	private Image sence;
-	
-	
+
 	public Scene ()
 	{
 		// Default state is on
@@ -31,7 +26,7 @@ public class Scene implements Comparable<Scene>
 	// These methods will be used by the "real" scenes that inherit from this scene
 	protected void CustomRender(GameContainer gc, Graphics g) throws SlickException 
 	{
-		
+
 	}
 	
 	protected void CustomUpdate(GameContainer gc, int t) throws SlickException 
