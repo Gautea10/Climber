@@ -174,7 +174,7 @@ public class Boot extends Scene {
         }
 
         // Player intersect with The flag
-        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 20 && activeWorld == 1){
+        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 70 && activeWorld == 1){
             activeWorld = 2;
             win.flagHitbox.setLocation(500000,500000);
             for (int j = 0; j < enemyArrayListWorld1.size(); j++) {
@@ -182,7 +182,7 @@ public class Boot extends Scene {
             }
         }
 
-        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 50 && activeWorld == 2) {
+        if (player.playerHitbox.intersects(win.getFlagHitbox()) && score >= 140 && activeWorld == 2) {
             activeWorld = 3;
             win.flagHitbox.setLocation(50000000, 500000);
             for (int j = 0; j < enemyArrayListWorld2.size(); j++) {
@@ -277,11 +277,11 @@ public class Boot extends Scene {
             player.render(gameContainer, graphics);
         }
 
-        if (score >= 20 && activeWorld == 1) {
+        if (score >= 70 && activeWorld == 1) {
             win.render(gameContainer, graphics);
         }
 
-        if (score >= 50 && activeWorld == 2) {
+        if (score >= 140 && activeWorld == 2) {
             win.getFlagHitbox().setLocation(512, 580);
             win.render(gameContainer, graphics);
         }
@@ -386,8 +386,7 @@ public class Boot extends Scene {
                 new Image("sprites/bossNotHit.png"),
                 new Image("sprites/bossHit.png")
         };
-        int duration = 150;
-        bossHitSprite = new Animation(bossHit, duration, false);
+        bossHitSprite = new Animation(bossHit, 150, false);
 
         gameTimer = new GameTimer();
     }
