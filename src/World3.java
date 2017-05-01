@@ -51,6 +51,7 @@ public class World3 extends Scene {
         graphics.texture(platform25,groundTexture3,0,10);
         graphics.draw(platform26);
         graphics.texture(platform26,groundTexture3,0,10);
+        graphics.setColor(Color.white);
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {

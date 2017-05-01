@@ -9,10 +9,9 @@ public class EnemyBoss extends Scene {
     private Animation sprite, right, left;
     private float yEnemy = 0;
     private float xEnemy = 0;
-    private static float gravity = 0.02f;
     public Shape Enemyhitbox;
     private World3 world3;
-    public int lives = 10;
+    public int lives = 20;
 
     public EnemyBoss(World3 world3) {
         super();
@@ -23,8 +22,6 @@ public class EnemyBoss extends Scene {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
-        graphics.setColor(Color.red);
-        graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
     }
 
@@ -64,6 +61,7 @@ public class EnemyBoss extends Scene {
         Enemyhitbox = new Rectangle(xEnemy, yEnemy, 119 ,95);
     }
 
+    //Method that moves the boss after the target
     public Shape followPlayer(Shape targetHitbox, Shape selfHitbox) {
         int step = 1;
 
