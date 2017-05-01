@@ -206,6 +206,7 @@ public class Boot extends Scene {
         if (boss.lives == 0 && activeWorld == 3) {
             activeWorld = 4;
             gameTimeUsed = gameTimer.getSecondsSinceCreation();
+            score += 100;
             boss.Enemyhitbox.setLocation(50000, 50000);
         }
 
