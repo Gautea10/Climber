@@ -77,7 +77,6 @@ public class World2 extends Scene {
         platform15 = new Rectangle(50,205,200,50);
         platform16 = new Rectangle(774,205,200,50);
         platform17 = new Rectangle(387,100,250,40);
-        //platform18 = new Rectangle(337,120,350,40);
 
         background2 = new Image("sprites/world2Bg.png");
         groundTexture2 = new Image("sprites/world2Texture.png");
