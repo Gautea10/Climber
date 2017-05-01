@@ -25,11 +25,7 @@ public class EnemyElf extends Scene  {
 
     protected void CustomRender(GameContainer gameContainer, Graphics graphics) throws SlickException
     {
-
-        graphics.setColor(Color.red);
-        graphics.setColor(Color.white);
         sprite.draw(Enemyhitbox.getX(), Enemyhitbox.getY());
-
     }
 
     protected void CustomUpdate(GameContainer gameContainer, int i) throws SlickException {
@@ -67,8 +63,8 @@ public class EnemyElf extends Scene  {
 
             sprite = new Animation(elf, duration, true);
 
-            Enemyhitbox = new Rectangle(xEnemy, yEnemy,40, 75);
-            }
+            Enemyhitbox = new Rectangle(xEnemy, yEnemy,36, 75);
+    }
 
 
     public String toString() {
